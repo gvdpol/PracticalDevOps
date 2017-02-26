@@ -32,6 +32,7 @@
     <Content Include="Templates\FullEnvironmentSetup.json" />
     <Content Include="Templates\FullEnvironmentSetup.param.json" />
     <Content Include="Templates\HostingPlanAndRules.json" />
+    <Content Include="Templates\RunMSTest.ps1" />
     <Content Include="Templates\SqlServerAndDb.json" />
     <Content Include="Templates\Website.json" />
     <Content Include="Templates\WebsiteRules.json" />
