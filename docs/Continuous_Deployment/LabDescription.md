@@ -53,21 +53,25 @@ Click on the "+ Add tasks" button to add a task for this environment.
 In the "Deploy" group, click the **Add** button next to "Azure Resource Group Deployment" to add the task. 
 Close the "Task catalogue" dialog.
 
+**Ensure that the Azure Resource Group Deployment task happens before the Deploy Azure App Service task. Otherwise there is no infrastructure to deploy the App Service to!**
+
 ![](media/42.png)
 
 **Step #4**. 
 
 Click on the "Azure Resource Group Deployment" task. Configure it as follows:
 
-> `Azure Connection Type`: Azure Resource Manager
+**First ensure that Version 1.* is selected for that task (pulldown menu at the right-hand top)**
 
-> `Azure RM Subscription`: select the Azure subscription endpoint that you created earlier
+> `Azure Subscription`: select the Azure subscription endpoint that you created earlier
 
 > `Action`: select "Create or Update Resource Group"
 
 > `Resource Group`: enter `$(ResourceGroupName)` into the box, you will create a variable named this shortly.
 
 > `Location`: select an Azure location
+
+> `Template location`: Linked artifact
 
 > `Template`: click the "..." button and browse to the FullEnvironmentSetupMerged.json file in the ARMTemplates folder.
 
@@ -93,9 +97,7 @@ Click on the "Azure Resource Group Deployment" task. Configure it as follows:
 		
 You will shortly define the values for each parameter, like `$(ServerName)`, in the Environment variables.
 
-> **Note**: If you open the FullEnvironmentSetupMerged.param.json file, you will see empty placeholders for these parameters. You could hard code values in the file instead of specifying them as "overrides". Either way is valid. If you do specify  values in the params file, remember that in order to change values, you would have to edit the file, commit and create a  new build in order for the Release to have access the new values.
-
-> Make sure the `Output -> Resource Group` parameter is empty. It is not required for this release.
+> **Note**: If you open the FullEnvironmentSetupMerged.param.json file, you will see empty placeholders for these parameters. You could hard code values in the file instead of specifying them as "overrides". Either way is valid. If you do specify  values in the params file, remember that in order to change values, you would have to edit the file, commit and create a new build in order for the Release to have access the new values.
 
 **Step #5**.
 
@@ -129,11 +131,11 @@ Now that the infrastructure deployment is configured, we can modify the initial 
 
 **Step #8**. 
 
-Click on the Dev environment in the Release Definition and select the "AzureRM Web App Deployment" Task. 
+Click on the Dev environment in the Release Definition and select the "AzureRM Web App Deployment" Task. Ensure that Version 1.* is selected at the right-hand top
 
 **Step #9** 
 
-For Web App Name, enter the `$(WebsiteName)` to use a variable. You defined this variable earlier when deploying
+For App Service Name, enter the `$(WebsiteName)` to use a variable. You defined this variable earlier when deploying
 the ARM Template. You will shortly "promote" it to a Release variable so that it can be used in all Environments in the Release. Check the Deploy to Slot check box
 
 **Step #10**. 
@@ -142,12 +144,12 @@ Enter `$(ResourceGroupName)` into the Resource Group Box. Enter "dev" for the Sl
 
 **Step #11**. 
 
-Tick "Take App Offline". This stops the website for deployment period and takes it back online afterwards. 
+Tick "Take App Offline" (in the "Additional Deployment Options" section). This stops the website for deployment period and takes it back online afterwards. 
 This is required because sites receive requests all the time causing files to lock down (i.e. making them unmodifiable).
 
 **Step #12**. 
 
-Click the ellipsis (...) button, next to the Package box, to set the Web Deploy Package location. 
+Click the ellipsis (...) button, next to the "Package" box, to set the Web Deploy Package location. 
 Browse to the PartsUnlimitedWebsite.zip file and click OK.
 
 ![](media/10.png)

@@ -61,7 +61,9 @@ Next select **New Service Endpoint** and select **Azure Resource Manager** in th
 
 ![](<media/NewServiceEndpoint.png>)
 
-Complete the details, provide a name for the **connection**, the details of your subscription should already been retrieved.
+Complete the details, provide a name for the **connection**, the details of your subscription should already been retrieved. When clicking OK, it might prompt you for your credentials, it also might be that you don't get the prompt, so two advices:
+* Keep an eye on your popup blocker
+* if it doesn't work, start an InPrivate/Incognito browser session to create the endpoint
 
 ![](<media/AddARMServiceEndpoint.png>)
 

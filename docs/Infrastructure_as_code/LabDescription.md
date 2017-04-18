@@ -90,7 +90,7 @@ Use Ctrl-F to search for the string, use F3 for Find Next.
 
 This string is present 4 times in the file.
 
-The first location shows the following:
+The second location shows the following:
 
             "appSettingNames": [
               "APPINSIGHTS_INSTRUMENTATIONKEY",
@@ -123,7 +123,7 @@ Change this to:
               }
 
 
-Find the lation location of **APPINSIGHTS_INSTRUMENTATIONKEY**
+Find the last location of **APPINSIGHTS_INSTRUMENTATIONKEY**
 
 This will show the following:
 
@@ -139,11 +139,6 @@ Change this to:
                 "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-StagingInsights')).InstrumentationKey]",
                 "Keys:ApplicationInsights:InstrumentationKey": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-StagingInsights')).InstrumentationKey]"
               }
-
-
-Now run the build and release pipeline again and open the various environments of the application from the Azure Portal.
-
-
 
 
 
