@@ -25,7 +25,7 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 ![](<media/4b.png>)
 
 -----------------------------------------------------------------
-**Step 3.** In the steps "Restore", "Build" and "Test", change the property "Project(s)" to \*\*/project.json (so remove ;\*\*/*.csproj). In the "Test" step the syntax deviates, but it is self-explanatory
+**Step 3.** In the steps "Restore", "Build", change the property "Project(s)" to \*\*/project.json. In the step "Test", change the property "Project(s)" to \*\*/\*Tests/project.json
 
 ![](<media/4d.png>)
 
