@@ -11,7 +11,7 @@ To do this, skip to Option #2
 
 ## Option #1: Browse the source code in VSTS
 **1**. In Visual Studio Team Services, open your Team project. 
-Navigate to the Code gub.
+Navigate to the Code hub.
 
 ![](<media/VSTS-Code-Hub.png>)
 

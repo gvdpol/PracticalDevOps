@@ -16,18 +16,18 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 ![](<media/VSTS-BuildAndRelease-Hub.png>)
 
 -----------------------------------------------------------------
-**Step 2.** Click on the **+ New** button, select the "ASP.NET Core Build (PREVIEW)" template and click "Next".
+**Step 2.** Click on the **+ New** button, select the "ASP.NET Core Build (PREVIEW)" template and click "Apply".
 
 ![](<media/4.png>)
 
------------------------------------------------------------------
-**Step 3.** On the next page click "Create". This will create a new build definition.
-
-![](<media/4a.png>)
-
->**Note:** The steps in this build definition are mapped to the dotnet core commands, it include the foloowing steps.
+>**Note:** The steps in this build definition are mapped to the dotnet core commands, it includes the following steps.
 
 ![](<media/4b.png>)
+
+-----------------------------------------------------------------
+**Step 3.** In the steps "Restore", "Build", change the property "Project(s)" to \*\*/project.json. In the step "Test", change the property "Project(s)" to \*\*/\*Tests/project.json
+
+![](<media/4d.png>)
 
 -----------------------------------------------------------------
 **Step 4.** Click on "Save", On the next dialog, enter a name for the build definition, then Click "OK".
@@ -35,7 +35,7 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 ![](<media/4c.png>)
 
 -----------------------------------------------------------------
-**Step 5.**  At this stage it's a good idea to check that the build definition successfully builds your project. Trigger the new build with default settings by clicking on the "Queue new build..." button and then clicking on "OK".
+**Step 4.**  At this stage it's a good idea to check that the build definition successfully builds your project. Trigger the new build with default settings by clicking on the "Queue new build..." button and then clicking on "OK".
 
 > **Note:** The build process may take a while, while the build executes, take the time to explore the other sections of the build definition.
 
