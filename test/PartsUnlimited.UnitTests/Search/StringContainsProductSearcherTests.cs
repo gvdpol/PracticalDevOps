@@ -3,6 +3,7 @@
 
 using NSubstitute;
 using PartsUnlimited.Models;
+using PartsUnlimited.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,20 +13,21 @@ namespace PartsUnlimited.Search
 {
     public class StringContainsProductSearcherTests
     {
-        private static readonly IEnumerable<string> s_productTitles = new[] { "word in the middle", "something", "something outside", "inside where outside" };
+        private static readonly IEnumerable<string> s_productTitles = 
+            new[] { "word in the middle", "something", "something outside", "inside where outside" };
 
         [Fact]
         public async Task SearchSuccess()
         {
             var productList = s_productTitles.Select(o => new Product { Title = o }).ToList();
-            var context = Substitute.For<IPartsUnlimitedContext>();
+            IPartsUnlimitedContext context = Substitute.For<IPartsUnlimitedContext>();
             var productDbSet = productList.ToDbSet();
 
             context.Products.Returns(productDbSet);
 
             var searcher = new StringContainsProductSearch(context);
 
-            var thing = await searcher.Search("thing");
+            IEnumerable<Product> thing = await searcher.Search("thing");
 
             Assert.Equal(new string[] { "something", "something outside" }, thing.Select(o => o.Title));
         }

@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>PartsUnlimitedWebsite-6A9311FC-8479-47A2-B34C-5107DE2CE035</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/49967f58-83ec-49d5-8197-dbdf9e3f26b6/resourcegroups/PartsUnlimitedRG/providers/microsoft.insights/components/PartsUnlimitedWebsite</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/49967f58-83ec-49d5-8197-dbdf9e3f26b6/resourcegroups/PartsUnlimitedRG/providers/microsoft.insights/components/PartsUnlimitedWebsite</ApplicationInsightsAnnotationResourceId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\_Login.cshtml" />
+    <Content Remove="wwwroot\Scripts\AppInsights.js" />
+    <Content Remove="wwwroot\Scripts\NewStoreArrivals.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\AppInsights.js" />
+    <None Remove="Scripts\NewStoreArrivals.js" />
+    <None Remove="Scripts\_references.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\PartsUnlimited.Models\PartsUnlimited.Models.csproj" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <Target Name="PrecompileScript" BeforeTargets="BeforeBuild">
+    <Exec Command="npm install --loglevel=error" />
+  </Target>
+
+  <Target Name="PostcompileScript" AfterTargets="Build">
+    <Exec Command="grunt" />
+  </Target>
+
+</Project>

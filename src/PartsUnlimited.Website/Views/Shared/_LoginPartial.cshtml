@@ -1,0 +1,38 @@
+@using Microsoft.AspNetCore.Identity
+@using PartsUnlimited.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var isNtlm = User.Identity.AuthenticationType == "NTLM";
+
+    <li class="dropdown">
+
+        <a href="@Url.Action("Index", "Store")" id="profile-link" class="dropdown-toggle head-link" data-toggle="dropdown">Profile&nbsp;<br class="hidden-xs" /><b class="caret"></b></a>
+
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+            <li>@Html.ActionLink("View Orders", "Index", "Orders", new { Area = string.Empty })</li>
+
+            @if (!isNtlm)
+            {
+                <li>
+                    @*Either NTLM will be used or social authentication will be used. Based on the authentication schemes enabled remove an unused block.*@
+                    @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    }
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+                </li>
+            }
+        </ul>
+    </li>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "login-link", @class = "head-link" })</li>
+    </ul>
+}
