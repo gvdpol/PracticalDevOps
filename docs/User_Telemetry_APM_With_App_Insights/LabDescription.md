@@ -1,71 +1,32 @@
-Lab #8 - User Telemetry and Performance Monitoring with Application Insights
+Lab - User Telemetry and Performance Monitoring with Application Insights
 ==================================================================================
 
+The marketing team has expressed interest in the **behavior of users** across the PartsUnlimited website for how to 
+best market the products, especially how popular the web application is and **where the users live**. 
+The development team would like to know **which browsers and operating systems** that most users browse to the site 
+from to target better user experiences. The development team has also noticed that the **recommendations page is 
+slow to load** and shows performance spikes in Application Insights telemetry. 
 
-The marketing team has expressed interest in the behavior of users across the PartsUnlimited website for how to best market the products, especially how popular the web application is and where the users live. 
+By viewing the details of performance monitoring through Application Insights, we will be able to drill down to the 
+code that has affected the slow performance of the web application and fix the code.
+Using the out-of-box telemetry for Application Insights, the teams will be able to find out how people use the 
+application and gain insights into the goals that they will need to achieve.
 
-The development team would like to know which browsers and operating systems that most users browse to the site from to target better user experiences. 
+In this lab, you will learn about setting up Application Insights to gain further insight into how users 
+are behaving towards your web application, and drill down into performance monitoring data through Application 
+Insights in the new Azure Portal.
 
-The development team has also noticed that the recommendations page is slow to load and shows performance spikes in Application Insights telemetry. 
+# Task 1: View real-time results for user telemetry in the Azure portal
 
-By viewing the details of performance monitoring through Application Insights, we will be able to drill down to the code that has affected the slow performance of the web application and fix the code.
-
-Using the out-of-box telemetry for Application Insights, the teams will be able to find out how people use the application and gain insights into the goals that they will need to achieve.
-
-In this lab, you will learn about setting up Application Insights to gain further insight into how users are behaving towards your web application, and drill down into performance monitoring data through Application Insights in the new Azure Portal.
-
-**Prerequisites**
-
-- Continuous Integration with Visual Studio Team Services (see [link](https://github.com/Microsoft/PartsUnlimited/blob/master/docs/HOL-Continuous_Integration/README.md))
-- Continuous Deployment with Release Management in Visual Studio Team Services (see [link](https://github.com/Microsoft/PartsUnlimited/blob/master/docs/HOL-Continuous_Deployment/README.md))
-- Application Insights created in the same Azure Resource Group as the PartsUnlimited website
-- Continuous Integration build with deployment to the Azure web app
-
-## Tasks Overview:
-
-**Task #1. Set up Application Insights for PartsUnlimited** 
-
-This will walk you through creating an Application Insights instance in Azure and connecting it to the PartsUnlimited solution.
-
-**Task #2. View real-time results for user telemetry in the Azure portal** 
-
-In this step you will be shown where to find all of the information collected by Application Insights.
-
-**Task #3. Using Application Performance Monitoring to resolve performance issues** 
-
-In this step you will investigate and resolve a performance issue with the help of Application Insights.
-
-
-## Tasks:
-
-### Task 1: Set up Application Insights for PartsUnlimited
-
-**Step 1.** 
-
-To configure Application Insights with PartsUnlimited, please follow these steps: [Application Insights - Getting Started](https://github.com/Microsoft/ApplicationInsights-aspnetcore/wiki/Getting-Started)  
-
-
-**Step 2.** 
-
-Open command line that supports Git and navigate to the PartsUnlimited repository. Run the following commands to push your changes to the remote repository and trigger CI and CD:
-```Bash
-git add .
-git commit -m "added Application Insights"
-git push
-```
-
-Now that the telemetry has been added to the web application, it may take a few minutes for Application Insights to refresh.
-
-
-### Task 2: View real-time results for user telemetry in the Azure portal
-
-Now that we've given Application Insights time to refresh, we can take a look at the usage data in the new Azure Portal. The Portal will show a variety of metrics out of the box, including number of sessions, users, and browser sessions.
+In this task you will be shown where to find all of the information collected by Application Insights.
+Now that we've given Application Insights time to refresh, we can take a look at the usage data in the new Azure Portal. 
+The Portal will show a variety of metrics out of the box, including number of sessions, users, and browser sessions.
 
 > **Note:** Before you proceed, you need to generate data for the Application Insights instance by browsing the website for a few minutes.
 
 **Step 1.** 
 
-In an Internet browser, navigate to <http://ms.portal.azure.com> and sign in with your credentials.
+In an Internet browser, navigate to <http://portal.azure.com> and sign in with your credentials.
 
 ![](<media/prereq-step1.png>)
 
@@ -132,11 +93,14 @@ The Page Views panel will break down the total page views, number of users, and 
 ![](<media/task2step11.png>)
 
 
-### Task 3: Using Application Performance Monitoring to resolve performance issues
+# Task 2: Using Application Performance Monitoring to resolve performance issues
+
+In this step you will investigate and resolve a performance issue with the help of Application Insights.
 
 **Step 1.** 
 
-In an Internet browser, navigate to the PartsUnlimited website that you previously deployed and go to the Recommendations page, such as http://partsunlimited.azurewebsites.net/home/recommendations.
+In an Internet browser, navigate to the PartsUnlimited website that you previously deployed and 
+go to the Recommendations page.
 
 ![](<media/task3-step6.png>) 
 
@@ -148,7 +112,8 @@ In the Application Insights instance blade, scroll down and select the “Perfor
 
 **Step 3.** 
 
-In the Performance panel, note the timeline. The timeline data may not show up immediately, so you will want to wait for a few minutes for the telemetry to collect performance data.
+In the Performance panel, note the timeline. The timeline data may not show up immediately, 
+so you will want to wait for a few minutes for the telemetry to collect performance data.
 
 ![](<media/task3-step2.png>)
 
@@ -158,25 +123,21 @@ Once data shows in the timeline, view the operations listed under the **Average 
 Click on the top operation in the list referring to the recommendations page to view details of that operation.
 
 **Step 5.** 
-
 Drill down into the method that is affecting the slow performance. We now know where the slow performance is being caused in our code.
 
 **Step 6.** 
 
-Using your preferred IDE or a text editor, open `HomeController.cs` and find the Recommendations method that is causing slow performance. At the top of the HomeController class, notice that the public int roco_count is set to 1000. Change that value to be 1.
+Navigate to Code hub in VSTS and open `HomeController.cs` and find the Recommendations method that is causing slow performance. 
+At the top of the HomeController class, notice that the public int roco_count is set to 1000. 
+Change that value to be 1.
 
 ![](<media/task3-step3.png>)
 
 **Step 7.**  
 
-Open command line in PartsUnlimited repository and run the following commands:
+Save your changes.
 
-```Bash
-git add .
-git commit -m "Changed roco_count from 1000 to 1 in HomeController.cs after being aware of slow perf in AI"
-git push
-```
->**Note** This will push the changes up to the remote repo and kick off a build automatically.
+>**Note** This will kick off a build automatically since we have enable CI in a previous lab.
 
 **Step 8.** 
 

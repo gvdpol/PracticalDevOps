@@ -1,4 +1,4 @@
-# Lab #4 - Parts Unlimited - The Sample Application
+# Parts Unlimited - The Sample Application
 
 Parts Unlimited is an example eCommerce website site based for training purposes on the website described in chapters 31-35 of The Phoenix Project, by Gene Kim, Kevin Behr and George Spafford, © 2013 IT Revolution Press LLC, Portland, OR. Resemblance to “Project Unicorn” in the novel is intentional; resemblance to any real company is purely coincidental.
 
@@ -8,9 +8,9 @@ The website includes product listings by category, product details, shopping car
 
 - Modern HTML5 responsive layout using bootstrap for mobile, tablet, and PC
 - Application is build with ASP.NET Core
-- Designed for Azure Websites, support for Staging slots, Testing in Production, and environment variables for feature flags (to turn off recommendations)
+- Designed for Azure Websites, support for staging slots, testing in production, and environment variables for feature flags (to turn off recommendations)
 - Basic administration pages to add or edit product information
-- Works with Visual Studio 2015 Update #3
+- Works with Visual Studio 2017
 - Supports multiple authentication options including Azure Active Directory, Google, and Facebook
 - Entity Framework code-first using SQL Azure or an in-memory database (Mono)
 - Includes Azure Resource Manager (ARM) JSON templates and PowerShell automation scripts to easily build and provision your environment

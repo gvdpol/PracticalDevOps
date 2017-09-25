@@ -1,5 +1,7 @@
-﻿Lab #3 - DevOps Introduction - Set up a Service Endpoint
+﻿Lab - Release Pipeline QuickStart
 ====================================================================================
+
+## Task: Create an Azure App Service with site
 
 ## Description
 In this lab we will create an Azure App Service website, our first release pipeline will deploy to this website.

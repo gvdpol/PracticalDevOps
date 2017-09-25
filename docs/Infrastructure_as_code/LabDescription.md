@@ -1,7 +1,8 @@
-Lab #6 - Infrastructure as Code
+Lab - Infrastructure as Code
 ===============================
-In previous labs, you have created a Continuous Integration build definition that builds the PartsUnlimited application, and
-runs unit tests whenever code is pushed to the master branch. You have also set up a Release Pipeline using Release Management (a feature of Visual Studio Team Services)
+
+In previous labs, you have created a Continuous Integration build definition that builds the PartsUnlimited application, 
+and runs unit tests whenever code is pushed to the master branch. You have also set up a Release Pipeline using Release Management (a feature of Visual Studio Team Services)
 to be able to continuously deploy the application to an Azure Web App. In a later lab the app will be deployed using deployment slots, initially to a `dev` deployment slot. 
 The `staging` slot will require and approver before the app is deployed into it. 
 Once an approver approves the `staging` slot, the app will be deployed to the production site.
@@ -10,27 +11,40 @@ Once an approver approves the `staging` slot, the app will be deployed to the pr
 **Complete the [Continuous Integration Lab](../Continuous_Integration/LabDescription.md).**
 This lab will setup the Continuous Integration (CI) build.
 
-## Task Overview:
+# Task 1: Explore the ARM Template to deploy the application infrastructure
+Navigate to the Code Hub and open the **deployment/Templates/FullEnvironmentSetupMerged.json** file, this file contains the full ARM template for the Parts Unlimited Application.
+This file contains five sections: **$schema**, **contentVersion**, **parameters**, **variables** and **resources**
+An ARM Template can also include a section called **outputs"", this section is not included in this case.
 
-### Task 1: Modify the CI Build to include the ARM Templates
-### Task 2: Modify the ARM Templates to include the environment variables
+> **$schema** (required) defines the location of the JSON schema file that describes the version of the template language. Use the URL shown in the preceding example.
+ 
+> **contentVersion** (required) contains the version of the template (such as 1.0.0.0). You can provide any value for this element. When deploying resources using the template, this value can be used to make sure that the right template is being used. 
 
-## Tasks:
+> **parameters** (optional) contains the values that are provided when deployment is executed to customize resource deployment. 
 
-### Task 1: Modify the CI Build to include the ARM Templates
+> **variables** (optional) containes the values that are used as JSON fragments in the template to simplify template language expressions. 
+
+> **resources** (required) Resource types that are deployed or updated in a resource group. 
+
+> **outputs** (optional) the values that are returned after deployment. 
+
+Explore the **parameters**, **variables** and **resources** sections, understanding these sections will be usefull in the continuous deployment lab.
+
+
+
+# Task 2: Modify the CI Build to include the ARM Templates in Build Artifacts
 
 In order to deploy to Azure, you're going to specify the infrastructure that the PartsUnlimited Website requires. 
-For example, the site requires an Azure SQL Database and an Azure Web App. 
-Rather than create these by hand, you are going to use the Azure Resource Manager (ARM) templates that describe this infrastructure in a json file. 
-This is good DevOps practice, since you're describing **infrastructure as code**.
+For example, the site requires an **Azure SQL Database** and an **Azure App Service Web App**. 
+Rather than create these by hand, we are going to use an Azure Resource Manager (ARM) template that describe this infrastructure in a json file. 
+This is a good DevOps practice, since you're describing **infrastructure as code**.
 
-The source code already defines the infrastructure required by the application in code (Infrastructure as Code). 
+The source code repo already includes the infrastructure template required by the application (Infrastructure as Code). 
 The code is a json file based on the Azure Resource Manager (ARM) template schema. 
 You will use the template to deploy or update the infrastructure as part of the release.
 
 The task that will deploy the **ARM template** will create the resource group if it does not exist. 
 If the resource group does exist, then the template is used to update the existing resources.
-
 
 > **Note:** 
 > 
@@ -41,32 +55,33 @@ If the resource group does exist, then the template is used to update the existi
 > Once you've completed this lab, you probably want to delete the resource group in order to minimize charges to your Azure account.
 
 
-**Step 1.** 
+### Step 1.
 
-In your VSTS Team project click on the **Build&Release** hub, and select Explorer.
+In your VSTS Team project click on the **Build and Release** hub, and select Builds.
 
-**Step 2.** 
+### Step 2.
 
-Click the Build definition that you configured in the Continuous Integration Lab, and click "Edit".   
+**Edit** the Build Definition that you configured in the Continuous Integration Lab.   
 
-**Step 3.** 
+### Step 3.
 
-Click "+ Add build step..." and add a new "Publish Build Artifacts". 
+Click **+ Add Task** and add a new "**Publish Build Artifacts** task
+
 Configure it as follows:
 
 ![](media/49.png)
 
-	* For `Path to Publish`, click the "..." button and browse to the env/Templates folder
+	* For `Path to Publish`, click the "..." button and browse to the deployment/Templates folder
 	* For `Artifact Name`, enter "ARMTemplates"
 	* For `Artifact Type`, select "Server"
 
-**Step 4.** 
+### Step 4.
 
-Save the updated build definition and queue a new build by clicking the "Queue new build" button. Accept the defaults and click OK.
+Save the updated build definition and queue a new build.
 
 > **Note:** The build process may take a while, but there is no need to await its completion before proceeding. Come back and do the last step after task 3.
 
-**Step 5.** 
+### Step 5.
 
 When the build has completed, verify that there are 2 folders: drop and ARMTemplates.
 
@@ -75,15 +90,15 @@ When the build has completed, verify that there are 2 folders: drop and ARMTempl
 - The drop folder should contain a single file: PartsUnlimitedWebsite.zip (click "Explore" to view the contents)
 - The ARMTemplates folder should contain a number of environment template and parameters JSON files.
 
-### Task 2: Modify the ARM Templates to include the environment variables
+# Task 3: Modify the ARM Templates to include the environment variables
 
 In this task we modify the ARM template to include the ASP.NET environment setting as an environment variable.
 
-**Step 1**
+### Step 1
 
-Navigate to the code hub and open the file env\templates\fullEnvironmentSetupMerged.json
+Navigate to the code hub and open the file deployment\templates\fullEnvironmentSetupMerged.json
 
-**Step 2**
+### Step 2
 
 Find the following string in the file: **APPINSIGHTS_INSTRUMENTATIONKEY**
 Use Ctrl-F to search for the string, use F3 for Find Next.

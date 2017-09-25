@@ -1,4 +1,4 @@
-# Lab #1 - Instructions to activate the Azure Pass#
+# Lab - Instructions to activate the Azure Pass#
 
 ## Redeeming your Microsoft Azure Pass Promo Code##
 It is recommended you use an In Private Browser session. Other logins can persist and cause errors during the activation step.
