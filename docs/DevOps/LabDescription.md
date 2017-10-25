@@ -7,11 +7,12 @@ This will not be a hands-on lab, discuss with the other attendees what practices
 Navigate to the [DevOps Learning Guide](https://www.visualstudio.com/devops/) and explore the contents.
 
 Take some time to explore practice like: 
-> Continuous Integration
-> Continuous Delivery
-> Infrastructure as Code
-> Application Monitoring (Telemetry)
-> Agile Practices
+- Backlog Management
+- Agile Planning 
+- Continuous Integration
+- Continuous Delivery
+- Infrastructure as Code
+- Application Monitoring (Telemetry)
 
 Articles discussing the [DevOps journey from Microsoft](https://www.visualstudio.com/learn/devopsmsft-overview/) will also present valuable insights.
 We will also present some slides during this lab to discuss the DevOps practices explored during this workshop.
