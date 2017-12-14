@@ -25,7 +25,7 @@ During the workshop we will use the [Parts Unlimited sample application](docs/Pa
 2. [DevOps introduction](docs/DevOps/LabDescription.md)
 2. [Parts Unlimited - The sample Application](docs/PartsUnlimited/LabDescription.md).
 3. [Backlog Management and Agile Planning](docs/BacklogManagement/LabDescription.md)
-4. [Release Pipeline QuickStart](docs/Intro_Release_Pipeline/LabDescription.md).
+4. [Release Pipeline Quickstart](docs/Intro_Release_Pipeline/LabDescription.md).
 5. [Continuous Integration](docs/Continuous_Integration/LabDescription.md).
 6. [Infrastructure As Code](docs/Infrastructure_as_code/LabDescription.md).
 7. [Continuous Deployment with Release Management](docs/Continuous_Deployment/LabDescription.md).

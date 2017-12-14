@@ -54,7 +54,7 @@ On the **Publish Test Results** task, change the **Test Result Format** to **VST
 ### Step 5.
 
 Select the Test step and add the following **--no-build --logger "trx;LogFileName=testresults.trx"** to the arguments property.
-The extra parameter **--no--build** prevents the code being build again
+The extra parameter **no-build** prevents the code being build again
 
 ### Step 6.
 
