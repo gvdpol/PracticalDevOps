@@ -1,48 +1,49 @@
-Lab - Continuous Deployment with Release Management in Visual Studio Team Services
-==================================================================================
+# Lab - Continuous Deployment with Release Management in Visual Studio Team Services
+
+## Description
 
 In previous labs, the application called PartsUnlimited, was committed to a Git repo in Visual Studio Team Services (VSTS), you have adopted the **Continuous Integration** practice and have created a build definition that builds the app and
-runs unit tests whenever code is pushed to the master branch. Now we are going to modify your existing release pipeline to enable continuous deployment of the application to an Azure Web App. 
+runs unit tests whenever code is pushed to the master branch. Now we are going to modify your existing release pipeline to enable continuous deployment of the application to an Azure Web App.
 
-## Pre-requisites:
+## Pre-requisites
 
-## Task 1. Modify the Release Pipeline for the Parts Unlimited Website.
+## Task 1. Modify the Release Pipeline for the Parts Unlimited Website
 
-Initially the app will be deployed to a `dev` deployment slot. 
-The `staging` slot will require an approver before the app is deployed into it. 
+Initially the app will be deployed to a `dev` deployment slot.
+The `staging` slot will require an approver before the app is deployed into it.
 Once an approver approves the `staging` slot, the app will be deployed to the `production` site.
 
-In this step, you will modify the Release Definition for the PartsUnlimited Website. 
+In this step, you will modify the Release Definition for the PartsUnlimited Website.
 You'll use the CI build output as the input artifact for the Release and then define how the release moves through `environments` with approvals
 in between.
 
-### Step #1
+### Step 1
 
 In VSTS, edit the release definition created in a previous lab. The template has a single Environment.
 
 > An **Environment** is simply a logical grouping of tasks - it may or may not correspond to a set of machines.
 For this Release Definition, you will create 3 Environments: **dev**, **dtaging** and **production**.
 
-The infrastructure required for all 3 environments is described in the ARM Template. 
-The ARM Template will be applied during deployment in the Dev Environment before deploying the website to Dev. 
+The infrastructure required for all 3 environments is described in the ARM Template.
+The ARM Template will be applied during deployment in the Dev Environment before deploying the website to Dev.
 
-### Step #2
+### Step 2
 
-Click the name label "Environment 1" and change the name to "Dev". 
+Click the name label "Environment 1" and change the name to "Dev".
 
-> This screenshot shows the old release definition editor. 
+> This screenshot shows the old release definition editor.
 > The next steps will be based on the old editor, during the workshop we will explore using the new Editor for Release Definitions.
 
-![](media/12.png)
+![Rename Environment 1](media/12.png)
 
 > You can also use a separate environment, for example called **setup infrastructure**, to execute the ARM deployment task.
 > If you setup your Release Definition in this way, you can next create dev environment and clone this environment to staging and production
 It will not be necessary to run any infrastructure tasks during Staging or Production deployments in this case.
 
-### Step #3
+### Step 3
 
-Click on the "+ Add tasks" button to add a task for this environment. 
-In the "Deploy" group, click the **Add** button next to "Azure Resource Group Deployment" to add the task. 
+Click on the "+ Add tasks" button to add a task for this environment.
+In the "Deploy" group, click the **Add** button next to "Azure Resource Group Deployment" to add the task.
 Close the "Task catalogue" dialog.
 
 **Ensure that the Azure Resource Group Deployment task happens before the Deploy Azure App Service task. Otherwise there is no infrastructure to deploy the App Service to!**
