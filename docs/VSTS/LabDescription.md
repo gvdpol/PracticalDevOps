@@ -15,7 +15,7 @@ Navigate to [https://www.visualstudio.com/team-services](https://www.visualstudi
 
 ![Login](<media/VSTS-login.png>)
 
-- The Azure subscription will be ## Enter your account details## in this account. If you do not have a Microsoft Account or Org ID you can create one by clicking on the link
+- The Azure subscription will be **Enter your account details** in this account. If you do not have a Microsoft Account or Org ID you can create one by clicking on the link
 
 ## Select your account
 

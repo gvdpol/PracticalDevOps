@@ -14,7 +14,7 @@ Navigate to [http://www.microsoftazurepass.com/](http://www.microsoftazurepass.c
 
 ![Login](<media/AzurePass-login.png>)
 
-- The Azure subscription will be ## Enter your account details## in this account. If you do not have a Microsoft Account or Org ID you can create one by clicking on the link
+- If you do not have a Microsoft Account or Org ID you can create one by clicking on the link
 
 ## Enter your account details
 
@@ -46,11 +46,19 @@ Navigate to [http://www.microsoftazurepass.com/](http://www.microsoftazurepass.c
 
 - Click Activate
 
+![Activate](<media/AzurePass-signup.png>)
+
+- Enter your contact information
+
+![Activate](<media/AzurePass-signup3.png>)
+
+- And agree with the subscription agreement
+
 ## Your subscription is ready
 
-![Subscription is ready](<media/AzurePass-subscriptionisready.png>)
+![Subscription is ready](<media/AzurePass-signup4.png>)
 
-- Start using your Azure subscription
+- Start using your Azure subscription by clicking **or get started with your Azure subscription**
 - Your Azure Pass is valid for one month
 
 [Back to Labs overview](../../Readme.md).
