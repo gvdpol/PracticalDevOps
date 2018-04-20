@@ -48,7 +48,7 @@ Close the "Task catalogue" dialog.
 
 **Ensure that the Azure Resource Group Deployment task happens before the Deploy Azure App Service task. Otherwise there is no infrastructure to deploy the App Service to!**
 
-![](media/42.png)
+![Add Azure Resource Group Deployment](media/42.png)
 
 ### Step #4
 
@@ -57,46 +57,36 @@ Click on the "Azure Resource Group Deployment" task. Configure it as follows:
 **First ensure that Version 1.* is selected for that task (pulldown menu at the right-hand top)**
 
 > `Azure Subscription`: select the Azure subscription endpoint that you created earlier
-
+>
 > `Action`: select "Create or Update Resource Group"
-
+>
 > `Resource Group`: enter `$(ResourceGroupName)` into the box, you will create a variable named this shortly.
-
+>
 > `Location`: select an Azure location
-
+>
 > `Template location`: Linked artifact
-
+>
 > `Template`: click the "..." button and browse to the FullEnvironmentSetupMerged.json file in the ARMTemplates folder.
 
-![](media/43.png)
+![Select ARM template file](media/43.png)
 
 > `Template Parameters`: click the "..." button and browse to the FullEnvironmentSetupMerged.param.json file in the ARMTemplates folder.
 
-![](media/56.png)
+![Select ARM template param file](media/56.png)
 
 > `Override Template Parameters`: Enter the following in a single line (shown split here for convenience):
 
-		-WebsiteName $(WebsiteName)
-		-PartsUnlimitedServerName $(ServerName)
-		-PartsUnlimitedHostingPlanName $(HostingPlan)
-		-CdnStorageAccountName $(StorageAccountName)
-		-CdnStorageContainerName $(ContainerName)
-		-CdnStorageAccountNameForDev $(StorageAccountName)-dev
-		-CdnStorageContainerNameForDev $(ContainerName)-dev
-		-CdnStorageAccountNameForStaging $(StorageAccountName)-stage
-		-CdnStorageContainerNameForStaging $(ContainerName)-stage
-		-PartsUnlimitedServerAdminLoginPassword (ConvertTo-SecureString -String '$(AdminPassword)' -AsPlainText -Force)
-		-PartsUnlimitedServerAdminLoginPasswordForTest (ConvertTo-SecureString -String '$(AdminTestPassword)' -AsPlainText -Force)
-		
+`-WebsiteName $(WebsiteName) -PartsUnlimitedServerName $(ServerName) -PartsUnlimitedHostingPlanName $(HostingPlan) -CdnStorageAccountName $(StorageAccountName) -CdnStorageContainerName $(ContainerName) -CdnStorageAccountNameForDev $(StorageAccountName)-dev -CdnStorageContainerNameForDev $(ContainerName)-dev -CdnStorageAccountNameForStaging $(StorageAccountName)-stage -CdnStorageContainerNameForStaging $(ContainerName)-stage -PartsUnlimitedServerAdminLoginPassword (ConvertTo-SecureString -String '$(AdminPassword)' -AsPlainText -Force) -PartsUnlimitedServerAdminLoginPasswordForTest (ConvertTo-SecureString -String '$(AdminTestPassword)' -AsPlainText -Force)`
+
 You will shortly define the values for each parameter, like `$(ServerName)`, in the Environment variables.
 
 > **Note**: If you open the FullEnvironmentSetupMerged.param.json file, you will see empty placeholders for these parameters. You could hard code values in the file instead of specifying them as "overrides". Either way is valid. If you do specify  values in the params file, remember that in order to change values, you would have to edit the file, commit and create a new build in order for the Release to have access the new values.
 
 ### Step #5
 
-Click on the ellipsis (...) button next to the Environment and select "Configure variables..."
+Click on the "Variables" tab to enter the Environment variables. Set the scope to Dev. Now the variables will only be available in the Dev environment.
 
-![](media/44.png)
+![Click Variables](media/44.png)
 
 ### Step #6
 
@@ -111,10 +101,10 @@ Create the following variables, adding values too.
 - **AdminTestPassword** - Admin password for dev and staging database servers
 - **ResourceGroupName** - Name of the Resource Group.
 
-![](media/50.png)
+![Edit variables](media/50.png)
 
-> **Note**: Use unique values for your variables by adding something custom at the end like your initials. Example for WebsiteName : pudncorejstr 
-
+> **Note**: Use unique values for your variables by adding something custom at the end like your initials. Example for WebsiteName : pudncorejstr
+>
 > **Note**: You can hide passwords and other sensitive fields by clicking the padlock icon to the right of the value text box.
 
 ### Step #7
@@ -124,60 +114,49 @@ Now that the infrastructure deployment is configured, we can modify the initial 
 
 ### Step #8
 
-Click on the Dev environment in the Release Definition and select the "AzureRM Web App Deployment" Task. Ensure that Version 1.* is selected at the right-hand top
+Click on the Dev environment in the Release Definition and select the Dev environment Deployment process. The App Service Name is linked to the "AzureRM Web App Deployment" Task.
 
-### Step #9
+![Change App service name](media/63.png)
 
-For App Service Name, enter the `$(WebsiteName)` to use a variable. You defined this variable earlier when deploying
+Enter `$(WebsiteName)` to use a variable. You defined this variable earlier when deploying
 the ARM Template. You will shortly "promote" it to a Release variable so that it can be used in all Environments in the Release. Check the Deploy to Slot check box
 
 ### Step #10
 
+Now select the "AzureRM Web App Deployment" Task and check *Deploy to slot*.
 Enter `$(ResourceGroupName)` into the Resource Group Box. Enter "dev" for the Slot. This will deploy the site to the "dev" deployment slot. This allows you to deploy the site to an Azure deployment slot without affecting the Production site.
 
 ### Step #11
 
-Tick "Take App Offline" (in the "Additional Deployment Options" section). This stops the website for deployment period and takes it back online afterwards. 
+Tick "Take App Offline" (in the "Additional Deployment Options" section). This stops the website for deployment period and takes it back online afterwards.
 This is required because sites receive requests all the time causing files to lock down (i.e. making them unmodifiable).
 
 ### Step #12
 
-Click the ellipsis (...) button, next to the "Package" box, to set the Web Deploy Package location. 
+Click the ellipsis (...) button, next to the "Package" box, to set the Web Deploy Package location.
 Browse to the PartsUnlimitedWebsite.zip file and click OK.
 
-![](media/10.png)
+![Select drop zip](media/10.png)
 
-### Step #13
-
-Clear the "Additional Arguments" parameter. 
-The ARM template you deployed has already configured all the slot-specific app settings and connection strings. 
-The Task should look like this:
-
-![](media/11.png)
-
-> **Note**: It is a good practice to run smoke tests to validate the website after deployment, or to run load tests. The code-base you are using
-	does not have any such tests defined. You can also run quick cloud-performance tests to validate that the site is up and running. For more
-	information on quick load tests, see [this video](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2015/Cloud-Loading-Testing-in-Visual-Studio-Team-Service)
-	from around the 6 minute mark.
+> **Note**: It is a good practice to run smoke tests to validate the website after deployment, or to run load tests. The code-base you are using does not have any such tests defined. You can also run quick cloud-performance tests to validate that the site is up and running. For more information on quick load tests, see [this video](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2015/Cloud-Loading-Testing-in-Visual-Studio-Team-Service) from around the 6 minute mark.
 
 ### Step #14
 
 Promote the WebSite Environment variables to a Release Variables
 
-Click on the "Dev" environment, click the ellipsis (...) button select "Configure Variables". 
-Make a note of the `WebsiteName` and `ResourceGroupName` variables' values and delete them from this list. Click OK.
-Click on "Variables" to open the Release variables. These are "global" variables that any Environment can use.
-Enter "WebsiteName" for the name and enter the value for the Website in Azure.
-Enter "ResourceGroupName" for the name and enter the value for the Resource group in Azure.
+Click on the "Variables" tab.
+Variables can be defined on Release level and environment level.
+Set the `WebsiteName` and `ResourceGroupName` variables scope to Release. This will make them available for all environments.
 
-![](media/53.png)
+![Promote variables](media/53.png)
 
 Click Save to save the Release Definition.
 
 ### Step #15
 
-**Test the Dev environment with ARM Template Deployment**
-You will shortly clone the Dev Environment into both Staging and Prod environments. 
+## Test the Dev environment with ARM Template Deployment
+
+You will shortly clone the Dev Environment into both Staging and Prod environments.
 However, before you do that it's a good idea to test that the Dev Environment is correctly configured by creating a new Release.
 
 Before moving on, it is a good idea to test the template so far.
@@ -186,26 +165,26 @@ Before moving on, it is a good idea to test the template so far.
 
 Click on "+ Release" in the toolbar and select "Create Release" to start a new release.
 
-![](media/45.png)
+![Create release](media/45.png)
 
 ### Step #17
 
 Select the latest build from the drop-down, and then select "Dev" as the target environment. Click "Create" to start the release.
 
-![](media/46.png)
+![Create release](media/46.png)
 
 ### Step #18
 
 Click the "Release-x" link to open the release.
 
-![](media/21.png)
+![Open running release](media/21.png)
 
 ### Step #19
 
 Click on the Logs link to open and monitor the deployment logs.
 You should see a successful release after a few minutes.
 
-![](media/51.png)
+![Monitor release](media/51.png)
 
 #### Step #20
 
@@ -218,14 +197,13 @@ You can check that the site was in fact deployed successfully by navigating to t
 
 > Since you deployed to the dev slot, you will need to navigate to `http://{siteName}-dev.azurewebsites.net` where siteName is the name of your Web App in Azure.
 
-![](media/52.png)
+![Review resource group](media/52.png)
 
-![](media/27.png)
+![View the site](media/27.png)
 
 > By default you will only receive email notifications on failed release. This can be changed in settings for each environment. Click the ellipsis (...) on the Dev Environment card and select "Assign approvers..". Navigate to "General tab" and set the desired behavior.
 
-
-**Clone the Dev environment to Staging and Production**
+## Clone the Dev environment to Staging and Production
 
 Now that you have verified that the Dev Environment is configured correctly, you can clone it to Staging and Production.
 
