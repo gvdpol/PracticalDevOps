@@ -66,7 +66,7 @@ When clicking OK, it might prompt you for your credentials, it also might be tha
 * Keep an eye on your popup blocker, it might block the relevant popup that prompts for credentials
 * If it doesn't work, start an InPrivate/Incognito browser session to create the endpoint
 
-![Add ARM Service Endpoint](<media/AddARMServiceEndpoint.png>)
+![Add ARM Service Endpoint](<media/AddARMServiceEndPoint.png>)
 
 Next return to your release definition, refresh the Azure subscription list, and select the connection you just created.
 Also you need to specify the App Service Name, select the name of the web site we have created in the Azure Portal during the previous lab.
