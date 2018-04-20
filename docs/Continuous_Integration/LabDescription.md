@@ -25,28 +25,6 @@ Select include for the branch filter and select the master branch. With this cha
 
  ![Enable CI Trigger](<media/EnableCITrigger.png>)
 
-### Step 3 - Add task
-
-The build is executing test cases, but the results are not yet presented on our summary page.
-Go back to the **Tasks** tab of the build definition.
-Click **Add Task**, in the dialog that opens, select the **Test** page and add a **Publish Test Results** task.
-The step is added to the end of the list, drag the task to right after the Test step. 
-
- ![Add Publish Test Results](<media/CI7.png>)
-
-### Step 4 - Change the settings
-
-On the **Publish Test Results** task, change the **Test Result Format** to **VSTest** and the **Test Results File** to **\*\*/testresults.trx**.
-
-### Step 5 - Change the arguments
-
-Select the Test step and add the following **--no-build --logger "trx;LogFileName=testresults.trx"** to the arguments property.
-The extra parameter **no-build** prevents the code being build again
-
-### Step 6 - Complete publish
-
-Click **Save** to save your changes.
-
 ## Task 2. Test the CI Trigger in Visual Studio Team Services
 
 We will now test the **Continuous Integration build (CI)** build we created by changing code in the Parts Unlimited project with Visual Studio Team Services.
