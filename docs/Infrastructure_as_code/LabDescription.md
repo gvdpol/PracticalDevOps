@@ -75,7 +75,7 @@ Configure it as follows:
 
 * For `Path to Publish`, click the "..." button and browse to the deployment/Templates folder
 * For `Artifact Name`, enter "ARMTemplates"
-* For `Artifact Type`, select "Server"
+* For `Artifact publish location`, select "Visual Studio Team Services/TFS"
 
 ### Step 4
 
