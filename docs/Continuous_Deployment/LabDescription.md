@@ -237,19 +237,23 @@ Click on the PartsUnlimited link and then the Edit link to open the Release Defi
 
 ### Step #23
 
-Click the ellipsis (...) on the Dev Environment card and select "Clone environment".
+Hover the mouse cursor over the Dev Environment card and select "Clone" in the below right corner.
 
 ![](media/28.png)
 
+Click on the new environment and give it the name "Staging"
+
+![](media/58.png)
+
 ### Step #24
 
-In the Dev Environment, you did not define any approvers. For Staging, however, you should configure approvers. In "Pre-deployment approval" section choose people who will approve deployments to staging environment and click "Create".
-
-![](media/13.png)
+In the Dev Environment, you did not define any approvers. Click on the below blue circle to open de Pre-deployment conditions.
+![](media/59.png)
 
 ### Step #25
 
-A new Environment is created. Enter "Staging" for the name.
+For Staging you should configure approvers. In "Pre-deployment approvals" section choose people who will approve deployments to the staging environment.
+![](media/13.png)
 
 ### Step #26
 
@@ -257,15 +261,15 @@ Delete the "Azure Resource Group Deployment" task. This is not required in this 
 
 ### Step #27
 
-Click the ellipsis (...) on the Staging Environment card and select "Configure variables".
+Click on the Variables link (upper left) from the Release Definition.
 
 ### Step #28
 
-Delete all the variables. These are used by the "Azure Resource Group Deployment" task which you just deleted, so they are not necessary in this Environment.
+Delete all the variables with the scope "Staging". These are used by the "Azure Resource Group Deployment" task which you just deleted, so they are not necessary in this Environment.
 
 ### Step #29
 
-On the Azure Web App Deployment task, set the Slot to `staging`.
+On the Azure App Service Deploy task, set the Slot to `staging`.
 
 ![](media/29.png)
 
@@ -273,9 +277,9 @@ On the Azure Web App Deployment task, set the Slot to `staging`.
 
 ### Step #30
 
-When we cloned dev to staging we set one person for staging's pre-approvals. We can adjust it even further by clicking ellipsis (...) on the Staging Environment card and select "Assign approvers...". For this HOL, you can be both incoming and the outgoing approver.
+When we cloned dev to staging we set one person for staging's pre-approvals. We can adjust it even further by clicking the blue circles on the Staging Environment (two circles, with a people icon in it, one for pre-approvals and one for post-approvals). For this HOL, you can be both pre and post approver.
 
-![](media/14.png)
+![](media/59.png)
 
 ### Step #31
 
@@ -283,14 +287,6 @@ In this case, you want to pause the deployment coming in. This ensures that if s
 they don't suddenly get a new build unexpectedly.
 
 ### Step #32
-
-Configure approvers for the Staging environment
-
-![](media/33.png)
-
-> **Pre-deployment approvers** must approve a deployment coming _into_ the environment. The deployment will stop and wait before executing any tasks in the environment until approval is granted.<br/> **Post-deployment approvers** approve deployments so that the _next_ Environment can begin. They act as sign-off for the current environment.<br/> **Approvers** can be individuals or groups.
-
-### Step #33
 
 Clone the Staging environment to Production.
 - Untick "Deploy to Slot" (i.e. the site will be deployed to the production slot).
@@ -304,11 +300,16 @@ Save the Release Definition.
 
 ### Step #35
 
-Click on the Triggers link of the Release Definition.
+Click on the Triggers link  of the build artifact of the Release Definition.
+
+![](media/60.png)
 
 ### Step #36
 
-For "Release trigger" pick "Continuous Deployment" and set trigger to the build definition created before.
+Set trigger to enabled.
+
+![](media/61.png)
+
 > Selecting the build as the trigger means that any time the artifact build
 completes, a new release will automatically start using the latest build.
 
@@ -339,8 +340,7 @@ Click on "+ Release" to create a new Release.
 
 Select the latest build, click Create.
 
-![](media/36.png)
-> **Note**: You can adjust whether to deploy this release to a particular environment.
+> **Note**: You can adjust whether to deploy this release to a particular environment or change automatic deployment of an environment to manual if you wish to do so.
 
 ### Step #3
 
