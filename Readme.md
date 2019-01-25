@@ -33,7 +33,10 @@ During the workshop we will use the [Parts Unlimited sample application](docs/Pa
 
 ## Overview of the DevOps Workshop Labs
 
-1. [Activation of Azure Pass - (Optional)](docs/Setup/AzurePass.md)
+1. Getting Azure Credits
+	1. [Activation of Azure Pass - (Optional)](docs/Setup/AzurePass.md)
+	2. [Activation of Azure for Students - (Optional)](docs/Setup/AzureForStudents.md)
+	3. If the above fails: ask your mentor
 2. Introduction
     1. [DevOps introduction](docs/DevOps/LabDescription.md)
     2. [Parts Unlimited - The sample Application](docs/PartsUnlimited/LabDescription.md)
