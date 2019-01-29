@@ -27,7 +27,7 @@ During the workshop we will use the [Parts Unlimited sample application](docs/Pa
 
 * Ensure you start by reading how to prepare Visual Studio [here](docs/VisualStudioPreps.md)
 * Read carefully, missing a step can be the difference between success and failure
-* The GUI of Azure DevOps changes constantly, some screenshots may be outdated, think logically and you will find a solution
+* The GUI of Azure (DevOps) changes constantly, some screenshots may be outdated, think logically and you will find a solution
 * Keep this lab open in a separate browser window
 * Navigate only using the links in these documents, don't use the file list at the left-hand side of this screen
 

@@ -1,6 +1,6 @@
 # Parts Unlimited - The Sample Application
 
-Parts Unlimited is an example eCommerce website site based for training purposes on the website described in chapters 31-35 of The Phoenix Project, by Gene Kim, Kevin Behr and George Spafford, � 2013 IT Revolution Press LLC, Portland, OR. Resemblance to �Project Unicorn� in the novel is intentional; resemblance to any real company is purely coincidental.
+Parts Unlimited is an example eCommerce website site based for training purposes on the website described in chapters 31-35 of [The Phoenix Project](https://itrevolution.com/book/the-phoenix-project/), by Gene Kim, Kevin Behr and George Spafford, © 2013 IT Revolution Press LLC, Portland, OR. Resemblance to “Project Unicorn” in the novel is intentional; resemblance to any real company is purely coincidental.
 
 The website includes product listings by category, product details, shopping cart, order history, product recommendations, search, and more.
 

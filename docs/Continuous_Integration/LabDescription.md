@@ -3,52 +3,56 @@
 ## Description
 
 In the [Release Pipeline QuickStart](../Intro_Release_Pipeline/LabDescription.md) lab we have created the first Build and Release pipeline for the Parts Unlimited Application. 
-We now want to set up Visual Studio Team Services to be able continuously integrate code into the master branch of code. 
+We now want to set up Azure DevOps to be able continuously integrate code into the master branch of code. 
 This means that whenever code is committed and pushed to the master branch, we want to ensure that it integrates into our code correctly to get fast feedback. 
-To do so, we are going to be configure our Build Definition to support Continuous Integration that will allow us to compile and run unit tests on our code every time a commit is pushed to Visual Studio Team Services.
+To do so, we are going to configure our Build Definition to support Continuous Integration that will allow us to compile and run unit tests on our code every time a commit is pushed to Azure DevOps.
 
 ## Task #1. Configure Continuous Integration
 
-In this task, you will configure our existing build definition that will be triggered every time a commit is pushed to your repository in Visual Studio Team Services.
-A continuous integration build will give us the ability check whether the code we checked in can compile and will successfully pass any automated tests that we have created against it.
-We will also include a task to publish the test results to VSTS.
+In this task, you will configure your existing build definition that will be triggered every time a commit is pushed to your repository in Azure DevOps.
+A continuous integration build will give us the ability check whether the code we committed can compile and will successfully pass any automated tests that we have created against it.
+We will also include a task to publish the test results to Azure DevOps.
 
 ### Step 1 - Change the build
 
-Click on the **Build and Release** hub at the top of the page, select **Builds** from the pull down menu;
-Select and open the definition you have created the previous lab, next click on the **Edit** link.
+Click the **Pipelines** hub on the left and select **Builds**;
+Select the definition you have created the previous lab and click the **Edit** button.
+
+![Edit Build Definition](<media/EditBuildDefinition.png>)
 
 ### Step 2 - Enable CI
 
 Select the Triggers tab and change the status for **Continuous Integration** to enabled.
-Select include for the branch filter and select the master branch. With this change your definition is triggered by changes that are pushed.
+Select include for the branch filter and select the master branch (probably no action is required, as this is the default). With this change your definition is triggered by changes that are pushed.
+
+Save the changes to the Build Definition **without** queueing it.
 
  ![Enable CI Trigger](<media/EnableCITrigger.png>)
 
-## Task 2. Test the CI Trigger in Visual Studio Team Services
+## Task 2. Test the CI Trigger in Azure DevOps
 
-We will now test the **Continuous Integration build (CI)** build we created by changing code in the Parts Unlimited project with Visual Studio Team Services.
+We will now test the **Continuous Integration build (CI)** build we created, by changing code in the *Parts Unlimited* project with Azure DevOps.
 
 ### Step 1 - Code
 
-Select the **Code** hub.
+Select the **Repos** hub.
 
 ### Step 2 - Edit the code
 
-(1) Click on Code, (2-5) navigate to **/src/PartsUnlimitedWebsite/Controllers** folder,  select the **HomeController.cs** file and then click on **Edit** in the toolbar.
+(1) Click **Files**, (2-5) navigate to **/src/PartsUnlimitedWebsite/Controllers** folder,  select the **HomeController.cs** file and then click on **Edit** in the toolbar.
 
 ![Edit HomeControler.cs](<media/CI15.png>)
 
 ### Step 3 - Commit the code
 
 After clicking **Edit**, add an extra comment (i.e. *// This is a test of CI*) after the last *Using* statement.
-Once complete, click **Save**.
+Once complete, click **Commit** and optionally change the comment to explain the change.
 
 ![Click Save](<media/CI16.png>)
 
 ### Step 4 - Check build
 
-Click **Build and Release** hub, and check if a new build is started for your build definition.
+Click **Pipelines** hub and select **Builds**. Check if a new build is started for your build definition.
 
 ![CI build is running](<media/CI17.png>)
 
@@ -61,31 +65,36 @@ Here you can also see the commands being logged to console and the current steps
 
 ### Step 6 - Build results
 
-Click on the **Build Number** on the top left and you should get a build summary similar to this, which includes test results.
+Click the **Summary** tab and you should get a build summary similar to this, which includes test results. When you click the link below **Tests succeeded**, or the **Tests** tab next to the **Summary** tab, a detailed overview of test results will be displayed.
 
 ![Build succeeded](<media/CI18.png>)
 
 ## Task 3. Explore the Build Definition
 
-The Build Editor provides functionality the edit our Build Definitions.
+The Build Editor provides functionality to edit our Build Definitions.
 In this task we will explore some of the options available to us.
+
+From the Build report, click the **...** button and choose **Edit pipeline**.
+
+![Edit pipeline from Build summary](<media/EditPipelineFromBuildReport.png>)
 
 ### Step 1 Edit Build Task
 
-You can rename your build steps to better describe the specifiy activity of the build.
+You can rename your build steps to better describe the specific activity of the build.
 Change the display name of the task
 
 ![Edit Name Of Build Step](<media/EditNameOfBuildStep.png>)
 
 ### Step 2 - Enabled property
 
-Each task has a property called **Enabled**.
+Each task has a property called **Enabled**. It is available under the **Control Options** section, or you can right-click the task.
+
 You can use this if not all of the details are specified.
-By disabling the step, you can save your build definition and later return to complete the details and enable the step.
+By disabling the step, you can save your build definition and later on, return to complete the details and enable the step.
 
 ### Step 3 - Version selector
 
-A build task can have multiple versions. With the version selector you can This will allow you to specify the version of the task that works for your build definition.
+A build task can have multiple versions. With the version selector you can change the major version of the task. This will allow you to specify the version of the task that works for your build definition.
 You can experiment with newer versions of the task to see if a newer version does break your build.
 
 ### Step 4 - Variables
@@ -110,11 +119,13 @@ Secret variables are:
 * Not decrypted into environment variables. So scripts and programs run by your build steps are not given access by default.
 * Decrypted for access by your build steps. So you can use them in password arguments (for example Build and Deploy your Java application to an Azure web app and also pass them explicitly into a script or a program from your build step (for example as $(password)).
 
+Note: if a variable value already contains data and the "lock" is clicked, the data is **not** retained!
+
 ### Step 6 - Variables -> Allow at queue time
 
 In the list you notice the **system.debug** variable variable with a default value of 'false'
 The "Allow at Queue Time checkbox for this variable is checked, that means you enter / change the value when queing a new build.
-Queue a new build now and change the value of the **system.debug** variable to true and take a close look at the output when the build is running.
+Queue a new build now and change the value of the **system.debug** variable to true and take a close look at the output when the build is running. This will not change the **system.debug** value of the Build Definition, only of the Build that you queued.
 
 ### Step 7
 
