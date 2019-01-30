@@ -50,8 +50,6 @@ Close the "Task catalogue" dialog.
 
 Click on the "Azure Resource Group Deployment" task. Configure it as follows:
 
-**First ensure that Version 1.* is selected for that task (pulldown menu at the right-hand top)**
-
 > `Azure Subscription`: select the Azure subscription endpoint that you created earlier
 >
 > `Action`: select "Create or Update Resource Group"
@@ -164,7 +162,7 @@ Click on "+ Release" in the toolbar and select "Create Release" to start a new r
 
 ### Step #17
 
-Select the latest build from the drop-down, and then select "Dev" as the target stage. Click "Create" to start the release.
+Verify if the latest build is selected from the artifacts drop-down. Click "Create" to start the release.
 
 ![Create release](media/46.png)
 
@@ -176,14 +174,15 @@ Click the "Release-x" link to open the release.
 
 ### Step #19
 
-Click on the Logs link to open and monitor the deployment logs.
+It will show the overview of the pipeline and activity in the pipeline. Click the **in progress** link of the Dev stage.
+
+![Running deployment](<media/RunningDeployment.png>)
+
+### Step #20
+
 You should see a successful release after a few minutes.
 
-![Monitor release](media/51.png)
-
-#### Step #20
-
-Click on the Logs link to open the deployment logs.
+![Monitor release](<media/DeploymentLogs.png>)
 
 ### Step #21
 
@@ -196,7 +195,11 @@ You can check that the site was in fact deployed successfully by navigating to t
 
 ![View the site](media/27.png)
 
-> By default you will only receive email notifications on failed release. This can be changed in settings for each stage. Click the ellipsis (...) on the Dev Stage card and select "Assign approvers..". Navigate to "General tab" and set the desired behavior.
+By default you will only receive email notifications on failed release. This can be changed in settings for each stage. Click the **pre-deployment conditions** on the Dev Stage card. 
+
+![Pre-deployment conditions](<media/PreDeploymentConditions.png>)
+
+Switch on **Pre-deployment approvals** and add one or more approvers. Approvers will be notified through email when a new release is pending for them.
 
 ## Clone the Dev stage to Staging and Production
 
@@ -204,9 +207,11 @@ Now that you have verified that the Dev Stage is configured correctly, you can c
 
 ### Step #22
 
-Click on the PartsUnlimited link and then the Edit link to open the Release Definition.
+From the release that deployed your application, click on the PartsUnlimited link and then the Edit link to open the Release Definition.
 
-> **Note:** It is possible to change the definition for a Release without changing the Release Definition (i.e. the Release is an instance of the Release Definition that you can edit). You want to make sure that you are editing the Release Definition, not a Release.
+![Edit Release Definition](<media/EditReleaseDefinitionFromRelease.png>)
+
+> **Note:** It is possible to change the settings/parameters for a Release without changing the actual Release Definition (i.e. the Release is an instance of the Release Definition that you can edit). You want to make sure that you are editing the Release Definition, not a Release.
 
 ### Step #23
 
@@ -220,7 +225,7 @@ Click on the new stage and give it the name "Staging"
 
 ### Step #24
 
-In the Dev Stage, you did not define any approvers. Click on the below blue circle to open de Pre-deployment conditions.
+In the Dev Stage, you did not define any approvers. Click the **Pre-deployment conditions** to edit the approvers.
 ![](media/59.png)
 
 ### Step #25
@@ -234,7 +239,7 @@ Delete the "Azure Resource Group Deployment" task. This is not required in this 
 
 ### Step #27
 
-Click on the Variables link (upper left) from the Release Definition.
+Click the Variables tab of the Release Definition (it should have an exclamation mark in red).
 
 ### Step #28
 
@@ -244,13 +249,13 @@ Delete all the variables with the scope "Staging". These are used by the "Azure 
 
 On the Azure App Service Deploy task, set the Slot to `staging`.
 
-![](media/29.png)
+![Change slot to staging](<media/ChangeSlotToStaging.png>)
 
 > **Note**: If you had stage-specific variables, you would be able to set Staging-specific values. It is not necessary in this case.
 
 ### Step #30
 
-When we cloned dev to staging we set one person for staging's pre-approvals. We can adjust it even further by clicking the blue circles on the Staging Stage (two circles, with a people icon in it, one for pre-approvals and one for post-approvals). For this HOL, you can be both pre and post approver.
+When we cloned dev to staging we set one person for staging's pre-approvals. We can adjust it even further by clicking the **pre-deployment approvals** button (left side of the stage block) or the **post-deployment approvals** button (right side of the stage block). For this HOL, you can be both pre and post approver.
 
 ![](media/59.png)
 
@@ -279,7 +284,7 @@ Click on the Triggers link  of the build artifact of the Release Definition.
 
 ### Step #36
 
-Set trigger to enabled.
+Set trigger to enabled (it can be that it is enabled by default, then no action is required).
 
 ![](media/61.png)
 
@@ -347,12 +352,6 @@ Once the Staging deployment has completed, you will need to approve that staging
 
 This will then trigger the pre-approval for Production. 
 Once you've approved that, deployment into the Production stage will begin.
-
-### Step #9
-
-To see all your releases and where they are in their respective pipelines, click on All Releases and then click the Overview link.
-
-![](media/39.png)
 
 ## Congratulations!
 

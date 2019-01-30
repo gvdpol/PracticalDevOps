@@ -28,11 +28,9 @@ The Portal will show a variety of metrics out of the box, including number of se
 
 In an Internet browser, navigate to <http://portal.azure.com> and sign in with your credentials.
 
-![](<media/prereq-step1.png>)
-
 **Step 2.** 
 
-Click on the “More services” tile on the left column, and select “Application Insights”.
+Click on the “All services” tile on the left column, and search/select “Application Insights”.
 
  ![](<media/prereq-step1.1.png>)
 
@@ -127,7 +125,7 @@ Drill down into the method that is affecting the slow performance. We now know w
 
 **Step 6.** 
 
-Navigate to Code hub in VSTS and open `HomeController.cs` and find the Recommendations method that is causing slow performance. 
+Navigate to Repos hub in Azure DevOps and open `HomeController.cs` and find the Recommendations method that is causing slow performance. 
 At the top of the HomeController class, notice that the public int roco_count is set to 1000. 
 Change that value to be 1.
 
