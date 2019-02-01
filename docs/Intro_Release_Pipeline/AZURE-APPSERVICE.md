@@ -13,15 +13,15 @@ Located at the left of the screen you see the menu. Note, your menu may show a d
 
 ![Azure Portal Menu](<media/AzurePortalMenu.png>)
 
-Click on **more services** and enter App Services to filter the items in the list.
+Click on **All services** and enter App Services to filter the items in the list.
 
 ![Find App Services](<media/FindAppServices.png>)
 
-Select App Services, the App Servives overview opens.
+Select App Services, the App Services overview opens.
 
 ![New App Service](<media/AppServicesNew.png>)
 
-Click on **+** to create a new App Service.
+Click on **+ Add** to create a new App Service.
 
 ![Create new App Service](<media/AppServiceNewWebApp.png>)
 
@@ -39,8 +39,8 @@ Since this needs to be an unique name, an option is to include the name of the t
 
 **Resource Group**: Select **Create new** for the Resource Group and enter the name of the Resource Group.
 
-**AppService Plan / Location**: Also create a new App Service plan, enter the name of the plan, the location (select West Europe) and select Standard Pricing Tier.
-The standard pricing tier is required later, when we are going to stage the application using deployment slots.
+**AppService Plan / Location**: Also create a new App Service plan; click the App Service plan, click **Create new**, enter the name of the plan, the location (select West Europe) and select S1 Pricing Tier in the **Production** tab.
+The standard (S1) pricing tier is required later, when we are going to stage the application using deployment slots.
 Go back to the **Release Pipeline QuickStart** lab overview and select the next task.
 
 [Back to Release Pipeline QuickStart](./LabDescription.md)

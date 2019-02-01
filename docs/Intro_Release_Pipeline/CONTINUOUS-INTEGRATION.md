@@ -9,10 +9,10 @@ Implementing CI helps to catch bugs early in the development cycle, which makes 
 Automated tests execute as part of the CI process to ensure quality.
 Artifacts are produced from CI systems and fed to release pipelines to drive frequent deployments.
 
-Build and Release are two of the DevOps services in VSTS that help you manage continuous integration and delivery of your applications.
-The Build service in VSTS helps you set up and manage CI for your applications.
+Build and Release are two of the services in Azure DevOps that help you manage continuous integration and delivery of your applications.
+The Build service in Azure Pipelines helps you set up and manage CI for your applications.
 
-In this lab we will setup CI with Visual Studio Team Services (VSTS).
+In this lab we will setup CI with Azure DevOps.
 Continuous Integration builds the app and runs unit tests whenever code is pushed to the master branch.
 After the CI step succeeds it will trigger a deployment, we will configure this in a next lab.
 
@@ -22,7 +22,7 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 
 ## Create our first Build Definition
 
-### Step 1. Navigate to the "Build & Release" hub and click on "Builds"
+### Step 1. Navigate to the "Pipelines" hub and click on "Builds"
 
 ![Build And Release Hub](<media/VSTS-BuildAndRelease-Hub.png>)
 
@@ -30,34 +30,29 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 
 ### Step 2. Create a new Build Definition
 
-Click on the **+ New** button, select the VSTS Git option if not selected. The team project, Repository and master branch are probably selected. If not, do so and click **Continue**.
+Click on the **New pipeline** button, click the link **Use the visual designer** and select the **Azure Repos Git** option if not selected. The team project, Repository and master branch are probably selected. If not, do so and click **Continue**.
 
 ![Build select repository](<media/4k.png>)
 
-Select the select the **"ASP.NET Core"** template from the list and click **"Apply"**. The Build Definition Editor opens with the tasks selected for this specific template.
+Select the **"ASP.NET Core"** template from the list and click **"Apply"**. The Build Definition Editor opens with the tasks selected for this specific template.
 
 ![Build template ASP.Net Core](<media/4.png>)
 
 ### Step 3. Complete the build definition
 
-The **Build Definition Editor** opens with the build definition just created.
+The **Pipelines Editor** opens with the build definition just created.
 The Editor highlights that a setting requires your attention.
 
 -----------------------------------------------------------------
-Select **Process** from the list, and make sure an agent is selected.
+Select **Pipeline** from the list, and make sure the "Hosted VS2017" Agent queue is selected.
 
 ![Select agent](<media/4f.png>)
-
------------------------------------------------------------------
-Select the Hosted VS2017 Agent
-
-![Select Hosted VS2017 Agents](<media/4g.png>)
 
 > Note: To build your code or deploy your software you need at least one agent. As you add more code and people, you'll eventually need more.
 When your build or deployment runs, the system begins one or more jobs. An agent is installable software that runs one build or deployment job at a time.
 
 -----------------------------------------------------------------
-Let's look at the other items in the Build Definition. Below Process you will find the **Get Sources** task, this is a build-in task you will find in every build definition.
+Let's look at the other items in the Build Definition. Below Pipeline you will find the **Get Sources** task, this is a build-in task you will find in every build definition.
 Next you will see a list of tasks more specific to the application that will be built.
 The first 4 out of this list are tasks that are mapped to the dotnet core commands: **restore**, **build**, **test** and **publish**. The icon in front of the task highlights this.
 The last task, that has been added as part of this template is the **publish artifact** task.
@@ -68,7 +63,7 @@ The last task, that has been added as part of this template is the **publish art
 
 ## Info: What is a Task
 
-1. > A **task** is the building block for defining automation in a build definition (tasks are also used within an environment of a release definition. A task is simply a packaged script or procedure that has been abstracted with a set of inputs. VSTS provides some built-in tasks to enable fundamental build and deployment scenarios. In addition, the Visual Studio Marketplace offers a number of extensions; each of which, when installed to your account or collection, extends the **task catalog** with one or more tasks. Furthermore, you can write your own custom extensions to add tasks to your account in VSTS.
+1. > A **task** is the building block for defining automation in a build definition (tasks are also used within an environment of a release definition. A task is simply a packaged script or procedure that has been abstracted with a set of inputs. Azure DevOps provides some built-in tasks to enable fundamental build and deployment scenarios. In addition, the Visual Studio Marketplace offers a number of extensions; each of which, when installed to your account or collection, extends the **task catalog** with one or more tasks. Furthermore, you can write your own custom extensions to add tasks to your account in Azure DevOps.
 
 2. > When you add a task to your build or release definition, it may also add a set of **demands** to the definition. The **demands** define the prerequisites that must be installed on the agent for the task to run. When you run the build or deployment, an agent that meets these demands will be chosen.
 
@@ -91,14 +86,14 @@ The last task, that has been added as part of this template is the **publish art
 
 ### Step 4. Save your Build Definition
 
-Click on "Save".
+Click on "Save & queue" and choose "Save" > click "Save".
 
 -----------------------------------------------------------------
 
 ### Step 5. Queue a build (test your build definition)
 
 At this stage it's a good idea to check that the build definition successfully builds your project. Trigger the new build with default settings by clicking on the "Queue" button.
-A dialopens with the settings selected for your build, click **Queue** again.
+A dialog opens with the settings selected for your build, click **Queue** again.
 
 ![Queue build](<media/4h.png>)
 
@@ -111,7 +106,7 @@ A dialopens with the settings selected for your build, click **Queue** again.
 
 ![Build progress](<media/4j.png>)
 
-After your build has finished click on the build number again to look at the results.
+After your build has finished, look at the results.
 If you have an issue, locate the task with the issue, identify the problem. Fix your issue(s) and queue an new build.
 Repeat this until you have a succesfull build.
 

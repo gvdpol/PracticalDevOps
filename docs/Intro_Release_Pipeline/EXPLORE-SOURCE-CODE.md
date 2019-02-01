@@ -8,15 +8,15 @@ In this lab we will explore the source code of the sample application.
 Earlier you have imported the repo with source code into your team project.
 In this workshop we will use Git for version control.
 
-## Option #1: Browse the source code in VSTS
+## Option #1: Browse the source code in Azure DevOps
 
-**1**. In Visual Studio Team Services, open your Team project and navigate to the Code hub.
+**1**. In Azure DevOps, open your Team project and navigate to the Azure Repos hub.
 
 ![Code hub](<media/VSTS-Code-Hub.png>)
 
 ## Option #2: Browse the source code using Visual Studio
 
-1. In Visual Studio Team Services, open your Team project. Navigate to the Code hub and click on the Clone button in the top right of the window. Copy the command line to your clipboard.
+1. In Azure DevOps, open your Team project. Navigate to the Azure Repos hub and click on the Clone button in the top right of the window. Copy the command line to your clipboard.
 
 2. Open Visual Studio (Since the appplication is build with ASP.NET Core 2.0, you will need Visual Studio 2017 for this lab)
 
