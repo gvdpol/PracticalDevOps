@@ -42,51 +42,41 @@ Click on the name of the telemetry that was created when you deployed the resour
 
 **Step 4.** 
 
-In the overview panel of the Application Insights instance, overall application health will be shown in server response time, page view load time, server requests, and failed requests. (Actual times may vary)
+In the overview panel of the Application Insights instance, overall application health will be shown in Failed requests, Server response time, Server requests, Availability and Unique users. (Actual times may vary)
 
 ![](<media/task2step3.png>)
 
 **Step 5.** 
 
-In the Application Insights instance blade, scroll down and click on the "Usage" tile. By drilling into usage, we can gauge how popular our web application is based on the number of distinct users, active sessions, and number of calls to trackPageView() (usually called once). Click on "Users" to view more information about the users.
+In the Application Insights instance blade, scroll down to the "Usage" section. By clicking on one of the subjects, we can gauge how popular our web application is based on the number of distinct users, active sessions, and number of calls to trackPageView() (usually called once). Click on "Users" to view more information about the users.
 
 ![](<media/task2step4.png>)
 
 **Step 6.** 
 
-In the Users timeline, note the number of users, new users, and page views. Additionally, the unique count of users by country is recorded. Click the X in the upper-right corner to close the Users panel.  
-
-![](<media/task2step6.png>)
+In the Users timeline, note the number of users, new users, and page views. Additionally, the unique count of users by country is recorded.  
 
 **Step 7.** 
 
-Back in the overview panel of the Application Insights instance, click on the chart for Page View Load Time.
+Click on the **Performance** page under the **Investigate** section. It will show how your application performs, how long it takes for the client to retrieve and display the page requested by the user.
 
 ![](<media/task2step7.png>)
 
 **Step 8.** 
 
-In the Browsers timeline, note the receiving response time, client processing time, page load network time, send request time, server response time, and page views. Additionally, the average count of browser page load time is shown below the timeline. Click on the "Edit" button in the first timeline chart.
+Note the toggle at the right-hand top side, where you can switch between Server and Browser (client) metrics. If you scroll down, you can see the actual duration it took from request until page load completed at the client-side.
 
 ![](<media/task2step8.png>)
 
-**Step 9.** 
-
-In the Chart Details pane, scroll down to the Client area and uncheck all of the properties except for Receiving Response Time. Then, turn on the Grouping and select "Browser version" as the "group by" property. The Browsers timeline will change and show the average receiving response time broken down into the various browsers that were used to log into the site.
-
-![](<media/task2step9.png>)
-
-![](<media/task2step9b.png>)
-
 **Step 10.** 
 
-Back in the Usage panel, and click on "Page views".
+Go to the **Usage** section and click **... More**. This will take you to a gallery of reports that are ready for use. Click the **Analysis of Page Views** report to open it.
 
 ![](<media/task2step10.png>)
 
 **Step 11.** 
 
-The Page Views panel will break down the total page views, number of users, and pages per session for the web application.
+The Page Views report will break down the Usage, Time spent on page, Time to first interaction and Page exit rates. Also take a look at the other reports, they contain valuable information. It is possible to create one or more custom reports using the quick start templates.
 
 ![](<media/task2step11.png>)
 
@@ -97,8 +87,7 @@ In this step you will investigate and resolve a performance issue with the help 
 
 **Step 1.** 
 
-In an Internet browser, navigate to the PartsUnlimited website that you previously deployed and 
-go to the Recommendations page.
+In an Internet browser, navigate to the PartsUnlimited website that you previously deployed and go to the Recommendations page. If you can't find a link to the page, go to (your base url)/home/recommendations. It will take a little while to load. Load it multiple times.
 
 ![](<media/task3-step6.png>) 
 
@@ -110,15 +99,14 @@ In the Application Insights instance blade, scroll down and select the “Perfor
 
 **Step 3.** 
 
-In the Performance panel, note the timeline. The timeline data may not show up immediately, 
-so you will want to wait for a few minutes for the telemetry to collect performance data.
-
-![](<media/task3-step2.png>)
+In the Performance panel, note the timeline. The timeline data may not show up immediately, so you will want to wait for a few minutes for the telemetry to collect performance data.
 
 **Step 4.** 
 
-Once data shows in the timeline, view the operations listed under the **Average of server response time by operation name** section under the timeline. 
+Once data shows in the timeline, view the operations section under the timeline. 
 Click on the top operation in the list referring to the recommendations page to view details of that operation.
+
+![Page load issue](<media/RecommendationsIssue.png>)
 
 **Step 5.** 
 Drill down into the method that is affecting the slow performance. We now know where the slow performance is being caused in our code.
@@ -145,9 +133,7 @@ Now that our changes have deployed to the website, open up a new incognito brows
 
 **Step 9.** 
 
-Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page.
-
-![](<media/task3-step7.png>) 
+Return to the Application Insights performance monitoring view in the Azure Preview Portal and refresh the page. Note that after some time, you see better performance of the page.
 
 In this lab, you learned how to set up Application Insights telemetry to gain further insight into how users are behaving towards your web application, and drill down into performance monitoring data through Application Insights in the new Azure Portal.
 
