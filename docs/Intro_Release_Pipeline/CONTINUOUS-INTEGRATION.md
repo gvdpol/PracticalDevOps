@@ -22,7 +22,7 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 
 ## Create our first Build Definition
 
-### Step 1. Navigate to the "Pipelines" hub and click on "Builds"
+### Step 1. Navigate to the "Pipelines" hub and click on "Pipelines"
 
 ![Build And Release Hub](<media/VSTS-BuildAndRelease-Hub.png>)
 
@@ -30,11 +30,11 @@ After the CI step succeeds it will trigger a deployment, we will configure this 
 
 ### Step 2. Create a new Build Definition
 
-Click on the **New pipeline** button, click the link **Use the visual designer** and select the **Azure Repos Git** option if not selected. The team project, Repository and master branch are probably selected. If not, do so and click **Continue**.
+Click on the **Create pipeline** button, click the link **Use the classic editor** and select the **Azure Repos Git** option if not selected. The team project, Repository and master branch are probably selected. If not, do so and click **Continue**.
 
 ![Build select repository](<media/4k.png>)
 
-Select the **"ASP.NET Core"** template from the list and click **"Apply"**. The Build Definition Editor opens with the tasks selected for this specific template.
+Select the **"ASP.NET Core"** template from the list (it might be displayed under "Other" instead of "Featured") and click **"Apply"**. The Build Definition Editor opens with the tasks selected for this specific template.
 
 ![Build template ASP.Net Core](<media/4.png>)
 
@@ -44,7 +44,7 @@ The **Pipelines Editor** opens with the build definition just created.
 The Editor highlights that a setting requires your attention.
 
 -----------------------------------------------------------------
-Select **Pipeline** from the list, and make sure the "Hosted VS2017" Agent queue is selected.
+Select **Pipeline** from the list, and make sure the "Azure Pipelines" Agent pool is selected and **"Agent Specification"** is set to "windows-2019".
 
 ![Select agent](<media/4f.png>)
 
@@ -86,23 +86,23 @@ The last task, that has been added as part of this template is the **publish art
 
 ### Step 4. Save your Build Definition
 
-Click on "Save & queue" and choose "Save" > click "Save".
+Click on "Save & queue" and choose "Save" > click "Save" (don't change the folder setting).
 
 -----------------------------------------------------------------
 
 ### Step 5. Queue a build (test your build definition)
 
 At this stage it's a good idea to check that the build definition successfully builds your project. Trigger the new build with default settings by clicking on the "Queue" button.
-A dialog opens with the settings selected for your build, click **Queue** again.
+A dialog opens with the settings selected for your build, click **Run**.
 
-![Queue build](<media/4h.png>)
+![Run pipeline](<media/4h.png>)
 
 > **Note:**
 > Your build will be queued. The build process may take a while, while the build executes, take the time to explore the other sections of the build definition.
 
 ![Build has been queued](<media/4i.png>)
 
-> You can see your build has been assigned a build number, you can monitor the execution of the build by clicking on the link.
+> You can see your build has been assigned a build number, you can monitor the execution of the build by clicking **Agent job 1**.
 
 ![Build progress](<media/4j.png>)
 

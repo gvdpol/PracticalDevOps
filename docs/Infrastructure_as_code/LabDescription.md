@@ -1,6 +1,6 @@
 # Lab - Infrastructure as Code
 
-In previous labs, you have created a Continuous Integration build definition that builds the PartsUnlimited application, and runs unit tests whenever code is pushed to the master branch. You have also set up a Release Pipeline using Release Management (a feature of Azure DevOps)
+In previous labs, you have created a Continuous Integration Build Pipeline that builds the PartsUnlimited application, and runs unit tests whenever code is pushed to the master branch. You have also set up a Release Pipeline using Release Management (a feature of Azure DevOps)
 to be able to continuously deploy the application to an Azure Web App. In a later lab the app will be deployed using deployment slots, initially to a `dev` deployment slot. 
 The `staging` slot will require and approver before the app is deployed into it. 
 Once an approver approves the `staging` slot, the app will be deployed to the production site.
@@ -61,7 +61,7 @@ In your Azure DevOps Team project click on the **Pipelines** hub, and select Bui
 
 ### Step 2
 
-**Edit** the Build Definition that you configured in the Continuous Integration Lab.
+**Edit** the Build Pipeline that you configured in the Continuous Integration Lab.
 
 ### Step 3
 
@@ -77,7 +77,7 @@ Configure it as follows:
 
 ### Step 4
 
-Save the updated build definition and queue a new build.
+Save the updated Build Pipeline and queue a new build.
 
 > **Note:**
 >The build process may take a while, but there is no need to await its completion before proceeding. Come back and do the last step after task 3.

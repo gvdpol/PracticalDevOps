@@ -16,19 +16,12 @@ In this workshop we will use Git for version control.
 
 ## Option #2: Browse the source code using Visual Studio
 
-1. In Azure DevOps, open your Team project. Navigate to the Azure Repos hub and click on the Clone button in the top right of the window. Copy the command line to your clipboard.
-
-2. Open Visual Studio (Since the appplication is build with ASP.NET Core 2.0, you will need Visual Studio 2017 for this lab)
-
-3. Go to View -> Team Explorer (**Tip: use Quick Access Ctrl-Q, type Team Explorer**)
-
-4. On the Connect page of the Team Explorer window, click the Clone dropdown located under the Local Git Repositories section
-
-5. Paste the URL you have copied to your clipboard in step #1
-
-6. If desired, change the local repository path
-
-7. Click the Clone button
+1. In Azure DevOps, open your Team project. Navigate to the Azure Repos hub and click on the Clone button in the top right of the window. 
+1. Click the pulldown menu and select Visual Studio
+![Clone in Visual Studio](<media/clone_visualstudio.png>)
+1. Confirm any browser (security) questions
+1. If desired, change the local repository path
+1. Click the **Clone/Connect** button
 
 ## Open the Parts Unlimited Visual Studio Solution
 

@@ -5,23 +5,23 @@ If you already have an hosted VSTS account for your Microsoft account, create a 
 
 ## Go to VSTS
 
-Navigate to [https://www.visualstudio.com/team-services](https://www.visualstudio.com/team-services/)
+Open a browser (it is strongly recommended to use **InPrivate, InCognito, Private** or similar mode to prevent automatic login) and navigate to [https://azure.microsoft.com/en-us/services/devops/](https://azure.microsoft.com/en-us/services/devops/)
 
 ![Get started for free](<media/VSTS-getstartedforfree.png>)
 
-- Click on Get started for free
+- Click on **Start free**
 
 ## Sign in with your account
 
-![Login](<media/VSTS-login.png>)
+If you don't have a Microsoft account, you can create one by clicking the **Create one!** link.
 
-- The Azure subscription will be **Enter your account details** in this account. If you do not have a Microsoft Account or Org ID you can create one by clicking on the link
+![Login](<media/VSTS-login.png>)
 
 ## Select your account
 
-![Select account](<media/VSTS-selectaccount.png>)
+If your account is both a Personal Account and Work or School Account, use the Personal Account, otherwise the Azure DevOps Organization is created in the Azure Active Directory of your company or school and you'll not have enough permissions to create EndPoints to Azure.
 
-- If your account is both a Live ID and Org ID please select which account you would like to use
+![Select account](<media/VSTS-selectaccount.png>)
 
 ## Enter your account details
 
@@ -29,23 +29,41 @@ Navigate to [https://www.visualstudio.com/team-services](https://www.visualstudi
 
 - Enter your account login information and select Sign In.
 
-## Choose e name for your VSTS account
+## Choose a name for your Azure DevOps Organization
+
+- Enter a name for the Azure DevOps Organization
+- Leave the hosting location as it is (West Europe)
+- Click **Continue**
 
 ![Enter VSTS name](<media/VSTS-createinstance.png>)
 
-- Enter a name for the VSTS host
-- Click on **Change details** to add additional project info and click on **Continue**
+Create a demo project, we will not use this project as it is created with the "Basic" template.
 
 ![Enter project info](<media/VSTS-changedetails.png>)
 
+## Create project for PracticalDevOps Lab
+
+- Click on the "Azure DevOps" logo to go to the welcome page
+
+![Navigate to welcome page](<media/VSTS-home.png>)
+
+- Click **New project** in the right-hand top corner
+
+![New project](<media/VSTS-newproject.png>)
+
+- Fill in the name, click **Advanced** and select **Scrum** as process and click **Create**
+
+![New project properties](<media/VSTS-newprojectproperties.png>)
+
 ## New project overview
 
-This wil create your hosted VSTS account and create a team project named PracticalDevOps.
+When the Team Project is created, you will be redirected to the New Project overview.
 
 ![PracticalDevOps project](<media/VSTS-teamproject.png>)
 
-- Click on **Import a repository**
-- Fill in the repository URL: https://github.com/gvdpol/PracticalDevOps.git 
+- Navigate to **Repos**
+- Click on **Import** under **Import a repository**
+- Fill in the repository URL: https://github.com/delta-n/PracticalDevOps.git 
 
 ## Import Git repository
 

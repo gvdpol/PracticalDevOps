@@ -6,7 +6,7 @@
 
 Software engineering practices have changed drastically in the last few years. Agile practices, DevOps, Cloud Computing, Open Source and similar developments have proven their effectiveness. Microsoft’s platforms for software development and cloud computing have also embraced these concepts and are at the leading edge in their domain.
 
-In this two-day workshop you will learn how software development works with Microsoft’s tools and languages. Based on a consistent sample, you will learn how to
+In this workshop you will learn how software development works with Microsoft’s tools and languages. Based on a consistent sample, you will learn how to
 
 * setup a team development environment with Azure DevOps
 * use the cross-platform build- and test-automation tools to automate your build- and quality assurance processes
