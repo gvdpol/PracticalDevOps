@@ -335,7 +335,6 @@
               "DefaultConnectionString"
             ],
             "appSettingNames": [
-              "ASPNETCORE_ENVIRONMENT",
               "APPINSIGHTS_INSTRUMENTATIONKEY",
               "Keys:ApplicationInsights:InstrumentationKey"
             ]
@@ -373,7 +372,6 @@
                 "[resourceId('Microsoft.Web/sites/slots', parameters('WebSiteName'), 'Dev')]"
               ],
               "properties": {
-                "ASPNETCORE_ENVIRONMENT": "Development",
                 "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-DevInsights')).InstrumentationKey]",
                 "Keys:ApplicationInsights:InstrumentationKey": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-DevInsights')).InstrumentationKey]"
               }
@@ -412,7 +410,6 @@
                 "[resourceId('Microsoft.Web/sites/slots', parameters('WebSiteName'), 'Staging')]"
               ],
               "properties": {
-                "ASPNETCORE_ENVIRONMENT": "Staging",
                 "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-StagingInsights')).InstrumentationKey]",
                 "Keys:ApplicationInsights:InstrumentationKey": "[reference(concat('Microsoft.Insights/components/', parameters('WebsiteName'), '-StagingInsights')).InstrumentationKey]"
               }
