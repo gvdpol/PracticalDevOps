@@ -2,7 +2,7 @@
 
 ## Ensuring you have a Microsoft account
 
-In order to start with Azure for Students, you need a Microsoft account. To verify if your account is a Microsoft account, go to (https://login.live.com) and enter your e-mailaddress. **Don't use your Work or School account!** Use a personal account instead. If your account is not a Microsoft yet, go to (https://signup.live.com) to create a new Microsoft account using an existing email address.
+In order to start with Azure for Students, you need a Microsoft account. To verify if your account is a Microsoft account, go to (https://login.live.com) and enter your e-mailaddress. **Don't use your Work or School account!** Use a personal account instead. If your account is not a Microsoft Account yet, go to (https://signup.live.com) to create a new Microsoft account using an existing email address.
 
 ## Activate the Azure for Students benefit
 

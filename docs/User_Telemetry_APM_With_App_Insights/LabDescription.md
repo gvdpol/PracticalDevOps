@@ -42,7 +42,7 @@ Click on the name of the telemetry that was created when you deployed the resour
 
 **Step 4.** 
 
-In the overview panel of the Application Insights instance, overall application health will be shown in Failed requests, Server response time, Server requests, Availability and Unique users. (Actual times may vary)
+In the overview panel of the Application Insights instance, overall application health will be shown in Failed requests, Server response time, Server requests and Availability. (Actual times may vary)
 
 ![](<media/task2step3.png>)
 
@@ -50,11 +50,13 @@ In the overview panel of the Application Insights instance, overall application 
 
 In the Application Insights instance blade, scroll down to the "Usage" section. By clicking on one of the subjects, we can gauge how popular our web application is based on the number of distinct users, active sessions, and number of calls to trackPageView() (usually called once). Click on "Users" to view more information about the users.
 
+> Note: if you want more traffic, ask one or more of your fellow workshop members to browse your website as well for a few minutes.
+
 ![](<media/task2step4.png>)
 
 **Step 6.** 
 
-In the Users timeline, note the number of users, new users, and page views. Additionally, the unique count of users by country is recorded.  
+In the Users timeline (click **View more insights**), note the number of users, new users, and page views. Additionally, the unique count of users by country is recorded.  
 
 **Step 7.** 
 
@@ -139,7 +141,7 @@ In this lab, you learned how to set up Application Insights telemetry to gain fu
 
 ## Further Reading
 
-[Usage analysis for web applications with Application Insights](https://azure.microsoft.com/en-us/documentation/articles/app-insights-web-track-usage/)
+[Usage analysis for web applications with Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/usage-overview)
 
 ## Next 
 

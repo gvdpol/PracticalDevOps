@@ -10,12 +10,15 @@ The website includes product listings by category, product details, shopping car
 - Application is build with ASP.NET Core
 - Designed for Azure Websites, support for staging slots, testing in production, and environment variables for feature flags (to turn off recommendations)
 - Basic administration pages to add or edit product information
-- Works with Visual Studio 2017
+- Works with Visual Studio 2019
 - Supports multiple authentication options including Azure Active Directory, Google, and Facebook
 - Entity Framework code-first using SQL Azure or an in-memory database (Mono)
 - Includes Azure Resource Manager (ARM) JSON templates and PowerShell automation scripts to easily build and provision your environment
 
 The original source code of the application is available of [GitHub](https://github.com/Microsoft/PartsUnlimited). The code we will be using has been slightly adapted for this workshop.
-**Media Elements and Templates.** You may copy and use images, clip art, animations, sounds, music, shapes, video clips and templates provided with the sample application and identified for such use in documents and projects that you create using the sample application. These use rights only apply to your use of the sample application and you may not redistribute such media otherwise.
+
+## Media Elements and Templates
+
+You may copy and use images, clip art, animations, sounds, music, shapes, video clips and templates provided with the sample application and identified for such use in documents and projects that you create using the sample application. These use rights only apply to your use of the sample application and you may not redistribute such media otherwise.
 
 [Back to Labs overview](../../Readme.md).
