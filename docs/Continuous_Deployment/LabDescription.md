@@ -2,26 +2,26 @@
 
 ## Description
 
-In previous labs, the application called PartsUnlimited, was committed to a Git repo in Azure DevOps, you have adopted the **Continuous Integration** practice and have created a build definition that builds the app and runs unit tests whenever code is pushed to the master branch. Now we are going to modify your existing release pipeline to enable continuous deployment of the application to an Azure Web App.
+In previous labs, the application called PartsUnlimited, was committed to a Git repo in Azure DevOps, you have adopted the **Continuous Integration** practice and have created a build definition that builds the app and runs unit tests whenever code is pushed to the master branch. Now we are going to modify your existing Release Pipeline to enable continuous deployment of the application to an Azure Web App.
 
 ## Pre-requisites
 
 ## Task 1. Modify the Release Pipeline for the Parts Unlimited Website
 
 Initially the app will be deployed to a `dev` deployment slot.
-The `staging` slot will require an approver before the app is deployed into it.
+The `staging` slot will require an approval before the app is deployed into it.
 Once an approver approves the `staging` slot, the app will be deployed to the `production` site.
 
-In this step, you will modify the Release Definition for the PartsUnlimited Website.
+In this step, you will modify the Release Pipeline for the PartsUnlimited Website.
 You'll use the CI build output as the input artifact for the Release and then define how the release moves through `stages` with approvals
 in between.
 
 ### Step 1
 
-In Azure DevOps, edit the release definition created in a previous lab. The template has a single Stage.
+In Azure DevOps, edit the Release Pipeline created in a previous lab. The template has a single Stage.
 
 > A **Stage** is simply a logical grouping of tasks - it may or may not correspond to a set of machines.
-For this Release Definition, you will create 3 Stages: **dev**, **staging** and **production**.
+For this Release Pipeline, you will create 3 Stages: **dev**, **staging** and **production**.
 
 The infrastructure required for all 3 stages is described in the ARM Template.
 The ARM Template will be applied during deployment in the Dev Stage before deploying the website to Dev.
@@ -33,16 +33,15 @@ Click the name label "Stage 1", a dialog appears at the right-hand side of the s
 ![Rename Stage 1](media/12.png)
 
 > You can also use a separate stage, for example called **setup infrastructure**, to execute the ARM deployment task.
-> If you setup your Release Definition in this way, you can next create dev stage and clone this stage to staging and production
+> If you setup your Release Pipeline in this way, you can next create dev stage and clone this stage to staging and production
 It will not be necessary to run any infrastructure tasks during Staging or Production deployments in this case.
 
 ### Step 3
 
-Click on the **+ Add tasks** button to add a task for this stage.
+Navigate to the tasks of the **Dev** stage and click on the "**+**" button in **Run on agent** to add a task for this stage.
 In the "Deploy" group, click the **Add** button next to "Azure Resource Group Deployment" to add the task.
-Close the "Task catalogue" dialog.
 
-**Ensure that the Azure Resource Group Deployment task happens before the Deploy Azure App Service task. Otherwise there is no infrastructure to deploy the App Service to!**
+> Hint: Ensure that the Azure Resource Group Deployment task happens before the Deploy Azure App Service task. Otherwise there is no infrastructure to deploy the App Service to!
 
 ![Add Azure Resource Group Deployment](media/42.png)
 
@@ -78,21 +77,21 @@ You will shortly define the values for each parameter, like `$(ServerName)`, in 
 
 ### Step #5
 
-Click on the "Variables" tab to enter the Stage variables. Set the scope to Dev. Now the variables will only be available in the Dev stage.
+Click on the "Variables" tab to enter the Stage variables. Variables can either apply to the entire Release Pipeline (set scope to **Release**) or to a specific stage (set scope to the name of the stage).
 
 ![Click Variables](media/44.png)
 
 ### Step #6
 
-Create the following variables, adding values too.
+Create the following variables, adding values too. Set the Scope of all variables to **Dev**.
 
 - **WebsiteName** - Name of the website in Azure
 - **ServerName** - Prefix for the name of the database servers. Will have `-dev` or `-stage` added for dev/staging
 - **HostingPlan** - Name of the hosting plan for the website
 - **StorageAccountName** - Storage account name prefix. Will have `-dev` or `-stage` added for dev/staging
 - **ContainerName** - Container name prefix. Will have `-dev` or `-stage` added for dev/staging
-- **AdminPassword** - Admin password for production database server
-- **AdminTestPassword** - Admin password for dev and staging database servers
+- **AdminPassword** - Admin password for production database server (don't forget to encrypt this one!)
+- **AdminTestPassword** - Admin password for dev and staging database servers (don't forget to encrypt this one!)
 - **ResourceGroupName** - Name of the Resource Group.
 
 ![Edit variables](media/50.png)
@@ -108,32 +107,27 @@ Now that the infrastructure deployment is configured, we can modify the initial 
 
 ### Step #8
 
-Click on the Dev stage in the Release Definition and select the Dev stage Deployment process. The App Service Name is linked to the "AzureRM Web App Deployment" Task.
+Click on the Dev stage in the Release Pipeline and select the Dev stage Deployment process. The App Service Name is linked to the "AzureRM Web App Deployment" Task.
 
 ![Change App service name](media/63.png)
 
 Enter `$(WebsiteName)` to use a variable. You defined this variable earlier when deploying
 the ARM Template. You will shortly "promote" it to a Release variable so that it can be used in all Stages in the Release.
 
-### Step #10
+### Step #9
 
-Now select the "AzureRM Web App Deployment" Task and check **Deploy to slot**.
+Now select the "Deploy Azure App Service" Task and check **Deploy to slot or App Service Environment**.
 Enter `$(ResourceGroupName)` into the Resource Group Box. Enter "dev" for the Slot. This will deploy the site to the "dev" deployment slot. This allows you to deploy the site to an Azure deployment slot without affecting the Production site.
 
-### Step #11
+### Step #10
 
-Tick **Take App Offline** (in the **Additional Deployment Options** section). This stops the website for deployment period and takes it back online afterwards.
-This is required because sites receive requests all the time causing files to lock down (i.e. making them unmodifiable).
-
-### Step #12
-
-Click the ellipsis (...) button, next to the "Package" box, to set the Web Deploy Package location. Browse to the PartsUnlimitedWebsite.zip file and click OK.
+Click the ellipsis (...) button, next to the "Package" box, to set the Web Deploy Package location. Browse to the PartsUnlimited.Website.zip file and click OK.
 
 ![Select drop zip](media/10.png)
 
-> **Note**: It is a good practice to run smoke tests to validate the website after deployment, or to run load tests. The code-base you are using does not have any such tests defined. You can also run quick cloud-performance tests to validate that the site is up and running. For more information on quick load tests, see [this video](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2015/Cloud-Loading-Testing-in-Visual-Studio-Team-Service) from around the 6 minute mark.
+> **Note**: It is a good practice to run smoke tests to validate the website after deployment, or to run load tests. The code-base you are using does not have any such tests defined. For more information on smoke tests options or load test options, please see: [https://docs.microsoft.com/en-us/azure/devops/test/load-test/overview?view=azure-devops#alternatives](https://docs.microsoft.com/en-us/azure/devops/test/load-test/overview?view=azure-devops#alternatives). A simple solution to run a Web Smoke test is this extension which you can install to your Azure DevOps organization: [https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.release-web-smoke-test-task](https://marketplace.visualstudio.com/items?itemName=OneLuckiDev.release-web-smoke-test-task).
 
-### Step #14
+### Step #11
 
 Promote the WebSite Stage variables to a Release Variables
 
@@ -143,9 +137,9 @@ Set the `WebsiteName` and `ResourceGroupName` variables scope to Release. This w
 
 ![Promote variables](media/53.png)
 
-Click Save to save the Release Definition.
+Click Save to save the Release Pipeline.
 
-### Step #15
+### Step #12
 
 ## Test the Dev stage with ARM Template Deployment
 
@@ -154,37 +148,37 @@ However, before you do that it's a good idea to test that the Dev Stage is corre
 
 Before moving on, it is a good idea to test the template so far.
 
-### Step #16
+### Step #13
 
-Click on "+ Release" in the toolbar and select "Create Release" to start a new release.
+Click on "Create Release" to start a new release.
 
 ![Create release](media/45.png)
 
-### Step #17
+### Step #14
 
 Verify if the latest build is selected from the artifacts drop-down. Click "Create" to start the release.
 
 ![Create release](media/46.png)
 
-### Step #18
+### Step #15
 
-Click the "Release-x" link to open the release.
+Click the "Release-x" (where x is the number of your current Release) link to open the release.
 
 ![Open running release](media/21.png)
 
-### Step #19
+### Step #16
 
 It will show the overview of the pipeline and activity in the pipeline. Click the **in progress** link of the Dev stage.
 
 ![Running deployment](<media/RunningDeployment.png>)
 
-### Step #20
+### Step #17
 
 You should see a successful release after a few minutes.
 
 ![Monitor release](<media/DeploymentLogs.png>)
 
-### Step #21
+### Step #18
 
 If you log into the Azure Portal, you will see the Resource Group has been created.
 You can check that the site was in fact deployed successfully by navigating to the site url.
@@ -205,15 +199,15 @@ Switch on **Pre-deployment approvals** and add one or more approvers. Approvers 
 
 Now that you have verified that the Dev Stage is configured correctly, you can clone it to Staging and Production.
 
-### Step #22
+### Step #19
 
-From the release that deployed your application, click on the PartsUnlimited link and then the Edit link to open the Release Definition.
+From the release that deployed your application, click on the PartsUnlimited link and then the Edit link to open the Release Pipeline.
 
-![Edit Release Definition](<media/EditReleaseDefinitionFromRelease.png>)
+![Edit Release Pipeline](<media/EditReleaseDefinitionFromRelease.png>)
 
-> **Note:** It is possible to change the settings/parameters for a Release without changing the actual Release Definition (i.e. the Release is an instance of the Release Definition that you can edit). You want to make sure that you are editing the Release Definition, not a Release.
+> **Note:** It is possible to change the settings/parameters for a Release without changing the actual Release Pipeline (i.e. the Release is an instance of the Release Pipeline that you can edit). You want to make sure that you are editing the Release Pipeline, not a Release.
 
-### Step #23
+### Step #20
 
 Hover the mouse cursor over the Dev Stage card and select "Clone" in the below right corner.
 
@@ -223,29 +217,31 @@ Click on the new stage and give it the name "Staging"
 
 ![](media/58.png)
 
-### Step #24
+### Step #21
 
 In the Dev Stage, you did not define any approvers. Click the **Pre-deployment conditions** to edit the approvers.
+
 ![](media/59.png)
+
+### Step #22
+
+For Staging you should configure approvers. In "Pre-deployment approvals" section choose people who will approve deployments to the staging stage.
+
+![](media/13.png)
+
+### Step #23
+
+Delete the "Azure Deployment" task from the "Staging" stage. This is not required in this Stage since the ARM template deployed the infrastructure for all 3 stages in the "Dev" stage.
+
+### Step #24
+
+Click the Variables tab of the Release Pipeline (it should have an exclamation mark in red).
 
 ### Step #25
 
-For Staging you should configure approvers. In "Pre-deployment approvals" section choose people who will approve deployments to the staging stage.
-![](media/13.png)
-
-### Step #26
-
-Delete the "Azure Resource Group Deployment" task. This is not required in this Stage since the ARM template deployed the infrastructure for all 3 stages.
-
-### Step #27
-
-Click the Variables tab of the Release Definition (it should have an exclamation mark in red).
-
-### Step #28
-
 Delete all the variables with the scope "Staging". These are used by the "Azure Resource Group Deployment" task which you just deleted, so they are not necessary in this Stage.
 
-### Step #29
+### Step #26
 
 On the Azure App Service Deploy task, set the Slot to `staging`.
 
@@ -253,36 +249,36 @@ On the Azure App Service Deploy task, set the Slot to `staging`.
 
 > **Note**: If you had stage-specific variables, you would be able to set Staging-specific values. It is not necessary in this case.
 
-### Step #30
+### Step #27
 
 When we cloned dev to staging we set one person for staging's pre-approvals. We can adjust it even further by clicking the **pre-deployment approvals** button (left side of the stage block) or the **post-deployment approvals** button (right side of the stage block). For this HOL, you can be both pre and post approver.
 
 ![](media/59.png)
 
-### Step #31
+### Step #28
 
 In this case, you want to pause the deployment coming in. This ensures that if someone is testing in the Staging stage,
 they don't suddenly get a new build unexpectedly.
 
-### Step #32
+### Step #29
 
 Clone the Staging stage to Production.
 - Untick "Deploy to Slot" (i.e. the site will be deployed to the production slot).
 - Update the approvers - again, you can be both approvers.
 
-### Step #34
+### Step #30
 
-Save the Release Definition.
+Save the Release Pipeline.
 
-**Configure Continuous Deployment for this Release Definition**
+**Configure Continuous Deployment for this Release Pipeline**
 
-### Step #35
+### Step #31
 
-Click on the Triggers link  of the build artifact of the Release Definition.
+Click on the Triggers link  of the build artifact of the Release Pipeline.
 
 ![](media/60.png)
 
-### Step #36
+### Step #32
 
 Set trigger to enabled (it can be that it is enabled by default, then no action is required).
 
@@ -291,7 +287,7 @@ Set trigger to enabled (it can be that it is enabled by default, then no action 
 > Selecting the build as the trigger means that any time the artifact build
 completes, a new release will automatically start using the latest build.
 
-### Step #37
+### Step #33
 
 Set "Stage triggers" to the following settings:
 - Deployment to "Dev" stage should be triggered after release is created.
@@ -306,13 +302,13 @@ Set "Stage triggers" to the following settings:
 
 Now that you have configured the Release Pipeline, you are ready to trigger a complete release.
 
-With an Azure Service Endpoint to deploy to, and a package to deploy (from your CI build), we need to modify the Release Definition. 
-The Release Definition defines how your application moves through the various Stages, including Tasks to update infrastructure, deploy your application, run scripts and run tests. 
+With an Azure Service Endpoint to deploy to, and a package to deploy (from your CI build), we need to modify the Release Pipeline. 
+The Release Pipeline defines how your application moves through the various Stages, including Tasks to update infrastructure, deploy your application, run scripts and run tests. 
 You can also configure incoming or outgoing approvals for each Stage.
 
 ### Step #1
 
-Click on "+ Release" to create a new Release.
+Click on "Create Release" to create a new Release.
 
 ### Step #2
 
@@ -358,12 +354,11 @@ Once you've approved that, deployment into the Production stage will begin.
 You've completed this lab!
 
 >**Note:** Deployment of schemas and data is beyond the scope of this lab. 
->It is recommended that you investigate <a href="https://msdn.microsoft.com/en-us/library/hh272686(v=vs.103).aspx"> SQL Server Data Tools (SSDT)</a> for managing database schema deployments.
+>It is recommended that you investigate <a href="https://docs.microsoft.com/en-us/sql/ssdt/sql-server-data-tools"> SQL Server Data Tools (SSDT)</a> for managing database schema deployments.
 
 ## Further Reading
 
-1. [Release Management in Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/what-is-release-management?view=azdevops)
-2. [Cloud Load Testing in Azure DevOps](https://channel9.msdn.com/Events/Visual-Studio/Connect-event-2015/Cloud-Loading-Testing-in-Visual-Studio-Team-Service)
+[Release Management in Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops)
 
 ## Next Step
 [Back to Labs overview](../../Readme.md).
