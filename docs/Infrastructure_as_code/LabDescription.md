@@ -10,6 +10,8 @@ Once an approver approves the `staging` slot, the app will be deployed to the pr
 **Complete the [Continuous Integration Lab](../Continuous_Integration/LabDescription.md).**
 This lab will setup the Continuous Integration (CI) build.
 
+> IMPORTANT Note: Earlier in the lab you created the Web App Service which is inside a Resource Group which has a name. Ensure that you use a **different** *Resource Group Name* from the one you already have. The other option is to remove the existing Resource Group.
+
 ## Task 1: Explore the ARM Template to deploy the application infrastructure
 
 Navigate to the **Repos** Hub and open the **deployment/Templates/FullEnvironmentSetupMerged.json** file, this file contains the full ARM template for the Parts Unlimited Application.

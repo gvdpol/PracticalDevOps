@@ -39,6 +39,8 @@ Since this needs to be a globally unique name, an option is to include the name 
 
 **Operating System**: Currently for .NET Core 2.0 only Linux can be chosen. Later .NET Core Frameworks can also be run on Windows Instances.
 
+> Note: Later on in the lab you will recreate a Web App Service using Infrastructure as Code. Using this technology, you can still run .NET Core 2.0 Web Apps on Windows.
+
 **Region**: West Europe delivers lowest network latency (as the datacenter is located in Amsterdam)
 
 **Linux Plan (West Europe)**: Leave the name of the plan like it is.
