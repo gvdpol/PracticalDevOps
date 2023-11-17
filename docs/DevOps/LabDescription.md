@@ -2,23 +2,19 @@ Lab - DevOps introduction
 ====================================================================
 
 In this lab we will introduce some of the DevOps Practices presented in this workshop.
-This will not be a hands-on lab, discuss with the other attendees what practices you are familiar with, what practices you are already applying and what practices are still on your backlog.  
+This will not be a hands-on lab, discuss with the other attendees what practices you are familiar with, what practices you are already applying and what practices are still on your backlog.
 
-Navigate to the [DevOps Learning Guide](https://www.visualstudio.com/devops/) and explore the contents.
+Navigate to [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/) and explore the contents.
 
-Take some time to explore practice like: 
-- Backlog Management
-- Agile Planning 
-- Continuous Integration
-- Continuous Delivery
-- Infrastructure as Code
-- Application Monitoring (Telemetry)
+Take some time to explore practice like:
 
-Articles discussing the [DevOps journey from Microsoft](https://www.visualstudio.com/learn/devopsmsft-overview/) will also present valuable insights.
-We will also present some slides during this lab to discuss the DevOps practices explored during this workshop.
+- Agile Planning tools
+- CI/CD
+- Repos
+- Test Plans
+- Artifacts
+
+Articles discussing the [DevOps at Microsoft](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/) will also present valuable insights.
+We will present some slides during this lab to discuss the DevOps practices explored during this workshop.
 
 [Back to Labs overview](../../Readme.md).
-
-
-
-

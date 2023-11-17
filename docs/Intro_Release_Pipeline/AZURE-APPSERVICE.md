@@ -1,54 +1,56 @@
-﻿Lab - Release Pipeline QuickStart
-====================================================================================
+﻿# Lab - Release Pipeline QuickStart
 
 ## Task: Create an Azure App Service with site
 
 ## Description
+
 In this lab we will create an Azure App Service website, our first release pipeline will deploy to this website.
 
 ## Create an Azure App Service web site
-Navigate to the [Azure Portal](http://portal.azure.com) (if you are not logged in yet, log in to the portal). 
-Located at the left of the screen you see the menu. Note, your menu may show a different list of menu items, we will later show how to customize the menu.
 
+Navigate to the [Azure Portal](http://portal.azure.com) (if you are not logged in yet, log in to the portal). Located at the left of the screen you see the menu button, click it. Note, your menu may show a different list of menu items, we will show how to customize the menu later on.
 
-![](<media/AzurePortalMenu.png>)
+![Azure Portal Menu](<media/AzurePortalMenu.png>)
 
+Click on **All services**, choose the category **Web** and enter App Services in the search field to filter the items in the list.
 
-Click on **more services** and enter App Services to filter the items in the list. 
+![Find App Services](<media/FindAppServices.png>)
 
-![](<media/FindAppServices.png>)
+Select App Services, the App Services overview opens.
 
+![New App Service](<media/AppServicesNew.png>)
 
-Select App Services, the App Servives overview opens. 
+Click on **+ Add** to create a new App Service; a new blade opens with more information on Web Apps.
 
-![](<media/AppServicesNew.png>)
-
-Click on **+** to create a new App Service.
-
-![](<media/AppServiceNewWebApp.png>)
-
-Select Web App from the available options, a new blade opens with more information on Web Apps.
-Click **Create**.
-
-![](<media/NewWebAppForm.png>)
+![New App Service form](<media/NewWebAppForm.png>)
 
 You need to provide a few details to create the App.
 
-**App Name** - Enter the name of the application. 
-Since this needs to be an unique name, an option is to include the name of the team or your initials as part of the name. 
+**Subscription**: Keep the default value.
 
-**Subscription**
-Keep the default value. 
+**Resource Group**: Select **Create new** and enter the name of the Resource Group.
 
-**Resource Group**
+**Name**: Enter the name of the application.
+Since this needs to be a globally unique name, an option is to include the name of the team or your initials as part of the name.
 
-Select **Create new** for the Resource Group and enter the name of the Resource Group. 
+**Publish**: Choose **Code**. The application is not provisioned for Docker deployments.
 
-**AppService Plan / Location**
-Also create a new App Service plan, enter the name of the plan, the location (select West Europe) and select Standard Pricing Tier. 
-The standard pricing tier is required later, when we are going to stage the application using deployment slots.
+**Runtime stack**: .NET Core 2.0 (the app is built for .NET Core 2.0)
+
+**Operating System**: Currently for .NET Core 2.0 only Linux can be chosen. Later .NET Core Frameworks can also be run on Windows Instances.
+
+> Note: Later on in the lab you will recreate a Web App Service using Infrastructure as Code. Using this technology, you can still run .NET Core 2.0 Web Apps on Windows.
+
+**Region**: West Europe delivers lowest network latency (as the datacenter is located in Amsterdam)
+
+**Linux Plan (West Europe)**: Leave the name of the plan like it is.
+
+**Sku and size**: This is where you choose the size of the VM that runs your application. The default is good enough for this lab (Premium V2 P1v2). We need a production-type VM because later, we are going to stage the application using deployment slots, which are not available in cheaper pricing tiers.
+
+Click **Review + create** and then **Create** to create the Web App Service. In a few minutes, you'll get notified that the deployment is complete.
+
 Go back to the **Release Pipeline QuickStart** lab overview and select the next task.
 
-[Back to Release Pipeline QuickStart](./LabDescription.md).
+[Back to Release Pipeline QuickStart](./LabDescription.md)
 
-[Back to Labs overview](../../Readme.md).
+[Back to Labs overview](../../Readme.md)
